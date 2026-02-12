@@ -36,10 +36,10 @@ def write_attestat_image(degree,author,student,channel):
     # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
     # You can download fonts from Google Fonts.
     try:
-        font_name = ImageFont.truetype("bot/arial.ttf", 40) # Specify font file and size
-        font_date = ImageFont.truetype("bot/arial.ttf", 30)
-        font_author = ImageFont.truetype("bot/arial.ttf", 30)
-        font_degree_ = ImageFont.truetype("bot/arial.ttf", 21)
+        font_name = ImageFont.truetype("/bot/arial.ttf", 40) # Specify font file and size
+        font_date = ImageFont.truetype("/bot/arial.ttf", 30)
+        font_author = ImageFont.truetype("/bot/arial.ttf", 30)
+        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 21)
     except IOError:
         font_name = ImageFont.load_default() 
         font_author = ImageFont.load_default() 
@@ -85,10 +85,10 @@ def write_school_image(degree,author,student):
     # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
     # You can download fonts from Google Fonts.
     try:
-        font_name = ImageFont.truetype("bot/arial.ttf", 40) # Specify font file and size
-        font_date = ImageFont.truetype("bot/arial.ttf", 30)
-        font_author = ImageFont.truetype("bot/arial.ttf", 30)
-        font_degree_ = ImageFont.truetype("bot/arial.ttf", 21)
+        font_name = ImageFont.truetype("/bot/arial.ttf", 40) # Specify font file and size
+        font_date = ImageFont.truetype("/bot/arial.ttf", 30)
+        font_author = ImageFont.truetype("/bot/arial.ttf", 30)
+        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 21)
     except IOError:
         font_name = ImageFont.load_default() 
         font_author = ImageFont.load_default() 
