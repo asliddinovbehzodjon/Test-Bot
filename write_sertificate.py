@@ -1,0 +1,105 @@
+from PIL import Image, ImageDraw, ImageFont
+from io import BytesIO
+def write_attestat_image(degree,author,student,channel):  
+    # 1. Open the image
+    # Make sure "input_image.jpg" is in the same directory or provide the full path
+    image = Image.open("images/attestat.jpg")
+    import textwrap
+    # 2. Create a drawing context
+    draw = ImageDraw.Draw(image)
+    # 3. Define the text and position
+    name = f"{student}"
+    if  float(degree) >85.9:  
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} % natija ko‘rsatib, belgilangan talablar asosida 'Oliy malaka toifasi va 70 foizlik ustamani' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+    elif 79.9<float(degree)<86:
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'oliy malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+    elif 69.9<float(degree)<80:
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+    elif 59.9<float(degree)<70:
+        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+    elif 54.9<float(degree)<60:
+        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'Mutahasis malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+    else:
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida ishtirok etib, test natijalariga asosan {degree} ball to'plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
+        
+    # Coordinates (x, y) for the top-left corner of the text
+    position_name = (500, 330)
+    position_date = (330, 670) 
+    position_degree_ = (250, 420) 
+    position_author = (780, 670) 
+    # Color in RGB format (e.g., black is (0, 0, 0), white is (255, 255, 255))
+    text_color = (255, 255, 255) 
+    from datetime import date
+    today = str(date.today())
+    author = f'{author}'
+    # 4. Load a font (optional, uses a default if not specified)
+    # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
+    # You can download fonts from Google Fonts.
+    try:
+        font_name = ImageFont.truetype("arial.ttf", 40) # Specify font file and size
+        font_date = ImageFont.truetype("arial.ttf", 30)
+        font_author = ImageFont.truetype("arial.ttf", 30)
+        font_degree_ = ImageFont.truetype("arial.ttf", 21)
+    except IOError:
+        font = ImageFont.load_default() # Fallback to default font if file not found
+        print("Custom font not found, using default.")
+
+    # 5. Add the text to the image
+    draw.text(position_name, name, fill=text_color, font=font_name)
+    draw.text(position_author, author, fill=text_color, font=font_author)
+    draw.text(position_date, today, fill=text_color, font=font_date)
+    wrapped_text = textwrap.fill(degree_, width=100)
+    draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
+        
+    # 6. Save the resulting image
+    bio = BytesIO()
+    bio.name = "image.png"   # IMPORTANT for Telegram
+    image.save(bio, format="PNG")
+    bio.seek(0)
+    return bio
+def write_school_image(degree,author,student):  
+    # 1. Open the image
+    # Make sure "input_image.jpg" is in the same directory or provide the full path
+    image = Image.open("images/school.jpg")
+    import textwrap
+    # 2. Create a drawing context
+    draw = ImageDraw.Draw(image)
+    # 3. Define the text and position
+    name = f"{student}"
+    degree_=f"@Aqilli_testbot yordamida tashkil  o‘tkazilgan test sinovlarida ishtirok etib, test natijalariga ko‘ra {degree} ball to‘plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
+    # Coordinates (x, y) for the top-left corner of the text
+    position_name = (500, 330)
+    position_date = (330, 670) 
+    position_degree_ = (250, 420) 
+    position_author = (780, 670) 
+    # Color in RGB format (e.g., black is (0, 0, 0), white is (255, 255, 255))
+    text_color = (255, 255, 255) 
+    from datetime import date
+    today = str(date.today())
+    author = f'{author}'
+    # 4. Load a font (optional, uses a default if not specified)
+    # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
+    # You can download fonts from Google Fonts.
+    try:
+        font_name = ImageFont.truetype("arial.ttf", 40) # Specify font file and size
+        font_date = ImageFont.truetype("arial.ttf", 30)
+        font_author = ImageFont.truetype("arial.ttf", 30)
+        font_degree_ = ImageFont.truetype("arial.ttf", 21)
+    except IOError:
+        font = ImageFont.load_default() # Fallback to default font if file not found
+        print("Custom font not found, using default.")
+
+    # 5. Add the text to the image
+    draw.text(position_name, name, fill=text_color, font=font_name)
+    draw.text(position_author, author, fill=text_color, font=font_author)
+    draw.text(position_date, today, fill=text_color, font=font_date)
+    wrapped_text = textwrap.fill(degree_, width=100)
+    draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
+        
+    # 6. Save the resulting image
+    bio = BytesIO()
+    bio.name = "image1.png"   # IMPORTANT for Telegram
+    image.save(bio, format="PNG")
+    bio.seek(0)
+    return bio
+    # return image.show()
