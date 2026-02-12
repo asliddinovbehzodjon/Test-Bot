@@ -41,7 +41,11 @@ def write_attestat_image(degree,author,student,channel):
         font_author = ImageFont.truetype("arial.ttf", 30)
         font_degree_ = ImageFont.truetype("arial.ttf", 21)
     except IOError:
-        font = ImageFont.load_default() # Fallback to default font if file not found
+        font_name = ImageFont.load_default() 
+        font_author = ImageFont.load_default() 
+        font_date = ImageFont.load_default()
+        font_degree_ = ImageFont.load_default()  
+        # Fallback to default font if file not found
         print("Custom font not found, using default.")
 
     # 5. Add the text to the image
@@ -86,8 +90,10 @@ def write_school_image(degree,author,student):
         font_author = ImageFont.truetype("arial.ttf", 30)
         font_degree_ = ImageFont.truetype("arial.ttf", 21)
     except IOError:
-        font = ImageFont.load_default() # Fallback to default font if file not found
-        print("Custom font not found, using default.")
+        font_name = ImageFont.load_default() 
+        font_author = ImageFont.load_default() 
+        font_date = ImageFont.load_default()
+        font_degree_ = ImageFont.load_default()  
 
     # 5. Add the text to the image
     draw.text(position_name, name, fill=text_color, font=font_name)
