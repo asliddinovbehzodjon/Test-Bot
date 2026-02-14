@@ -224,7 +224,7 @@ async def check_answers_2(trueanswers,answers):
     text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"
           f"❌ Xato javoblar: <b>{fl}</b> ta\n"
           f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"
-           f"🗓️ {now_date} ⏱️ {now_hour}\n\"
+           f"🗓️ {now_date} ⏱️ {now_hour}\n\n"
            f"✅ Maktab testi")
     data = {}
     data['result'] = text
