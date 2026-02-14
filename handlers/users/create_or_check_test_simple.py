@@ -15,40 +15,37 @@ from states.mystate import *
 def tekst(code,questions):
     tekst_=f"<b>✅Test bazaga qo`shildi.</b>\n"\
     f"<b>Test kodi: {code}</b>\n"\
-    f"<b>Test turi:🏫 Maktab testi</b>\n"\
     f"<b>Savollar soni: {questions} ta.</b>\n"\
     f"<b>Quyidagi tayyor izohni o'quvchilaringizga yuborishingiz mumkin</b>\n"\
     f"<b>👇👇👇</b>\n"
     return tekst_
-def tekst2(creator,questions,code,bot_username,user_id,class_number,subject):  
-    tekst_2 =   f"📝📝Test boshlandi.\n\n\n"\
-                f"👤 Test muallifi:    {html.link(value=creator,link=f'tg://user?id={user_id}')}\n\n\n"\
-                f"ℹ️ Test turi:🏫 Maktab testi\n\n"\
-                f"ℹ️ Sinf:{class_number}\n\n"\
-                f"ℹ️ Fan nomi:{subject}\n\n"\
-                f"ℹ️ Savollar soni: {questions} ta\n\n"\
-                f"ℹ️ Test kodi: {code}\n\n\n"\
-                f"🔴 Javoblaringizni @{bot_username} ga quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-                f"{html.pre('!!test_kodi!!1a2b3c4d....')}\n\n\n"\
-                f"🛑 Eslatma!\t"\
-                f"Javoblar aynan @{bot_username} ga yuborilishi shart, boshqasiga emas.\n"
+def tekst2(creator,questions,code,bot_username,user_id):  
+    tekst_2 =  f"📝📝Test boshlandi.\n\n\n"\
+    f"👤 Test muallifi:    {html.link(value=creator,link=f'tg://user?id={user_id}')}\n\n\n"\
+    f"ℹ️ Test turi:Oddiy test\n\n"\
+    f"ℹ️ Savollar soni: {questions} ta\n\n"\
+    f"ℹ️ Test kodi: {code}\n\n\n"\
+    f"🔴 Javoblaringizni @{bot_username} ga quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
+    f"{html.pre('%%test_kodi%%1a2b3c4d....')}\n\n\n"\
+    f"🛑 Eslatma!\t"\
+    f"Javoblar aynan @{bot_username} ga yuborilishi shart, boshqasiga emas.\n"
     return tekst_2
-                
+    
 # Check Answers With Write by Hand
-@dp.message((F.text == "🏫 Maktab testlari"))
+@dp.message((F.text == "🧮 Testlar"))
 async def attestat(message:types.Message,state:FSMContext):
            await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
-              reply_markup=test_button_school()  )
+              reply_markup=test_button_simple()  )
 # Check Answers With Write by Hand
-@dp.message((F.text =="➕ Maktab Testi Yaratish") )
+@dp.message((F.text =="➕ Test Yaratish") )
 async def attestat_create_test(message:types.Message,state:FSMContext):
            await message.answer(
-               text=  f"<b>$$sinf_raqami$$fan_nomi$$1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
+               text=  f"<b>@@1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
-           await state.set_state(SchoolTestCreate.create)
+           await state.set_state(SimpleTestCreate.create)
 
-@dp.message((F.text.startswith('$$') | (F.text=="❌ Bekor qilish")),SchoolTestCreate.create )
+@dp.message((F.text.startswith('@@') | (F.text=="❌ Bekor qilish")),SimpleTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
         if text =="❌ Bekor qilish":
@@ -57,68 +54,57 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
               reply_markup=main_button()  )
             await state.clear()
         else:
-            info = await checkformat_school(text)
+            info = await checkformatschool(text)
             if info:
-                if info:
-                    telegram_id = message.from_user.id 
-            
-                type='school'
-                answers = info.get('answers_string',None)
-                class_number = info.get('class_number',None)
-                subject = info.get('subject',None)
-                me = await bot.get_me()
-                bot_username = me.username
-                created = await create_answers_school(
-                    telegram_id=telegram_id,
-                    answers=answers,
-                    type_test=type,
-                    class_number=class_number,
-                    subject=subject
+                telegram_id = message.from_user.id 
+        
+            type='school'
+            answers = info.get('answers_string',None)
+            me = await bot.get_me()
+            bot_username = me.username
+            created = await create_answers(
+                telegram_id=telegram_id,
+                answers=answers,
+                type_test=type
+            )
+            await message.answer(
+                tekst(
+                    code = created,
+                    questions=info.get('len',None)
+                ),
+                reply_markup=ReplyKeyboardRemove()
+            )
+            await message.answer(
+                html.bold(
+                    tekst2(
+                    code = created,
+                    questions=info.get('len',None),
+                    user_id=message.from_user.id,
+                    creator=message.from_user.full_name,
+                    bot_username=bot_username
+                    
                 )
-                await message.answer(
-                    tekst(
-                        code = created,
-                        questions=info.get('len',None)
-                    ),
-                    reply_markup=ReplyKeyboardRemove()
-                )
-                await message.answer(
-                    html.bold(
-                        tekst2(
-                        code = created,
-                        questions=info.get('len',None),
-                        user_id=message.from_user.id,
-                        creator=message.from_user.full_name,
-                        bot_username=bot_username,
-                        class_number=class_number,
-                        subject = subject
-                        
-                    )
-                    ),
-                    reply_markup=ReplyKeyboardRemove()
-                )            
-                await state.clear()
-            else:
-               await message.answer(
-               text=  f"<b>$$sinf_raqami$$fan_nomi$$1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
-           )
-               await state.set_state(SchoolTestCreate.create)
+                ),
+                reply_markup=ReplyKeyboardRemove()
+            )            
+            await state.clear()
+           
 # Check 
-@dp.message((F.text =="✅ Maktab Testini tekshirish") )
+@dp.message((F.text =="✅ Testni tekshirish") )
 async def attestat_check_test(message:types.Message,state:FSMContext):
            matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-           f"{html.pre('!!test_kodi!!1a2b3c4d....50b')}\n\n\n"\
+           f"{html.pre('%%test_kodi%%1a2b3c4d....50b')}\n\n\n"\
 
            await message.answer(matn)
 from aiogram.types import ReplyKeyboardRemove
-@dp.message((F.text.startswith('!!')))
+@dp.message((F.text.startswith('%%')))
 async def attestat_check_school(message:types.Message,state:FSMContext): 
-            info = await checkformat_3(message.text)
+            info = await checkformat_2305(message.text)
 
             if info:
                 val = "☝️ To'g'ri test yakunlangandan so'ng yuboriladi."
                 code  = info.get('test_code',None)
-                get_test_me = await get_test_school(id=code)
+                get_test_me = await get_test(id=code)
                 done = await done_or_not(code=code,telegram_id=message.from_user.id)
                 if done:
                     await message.answer(html.bold('Siz,bu testni allaqachon bajardingiz!'))
@@ -147,8 +133,8 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                         try:
                             cont =  f"{html.bold(html.link(value=f'{message.from_user.full_name}',link=f'tg://user?id={message.from_user.id}'))} {html.bold(code)} kodli testning javoblarini yubordi.\n\n"\
                                     f"Natijasi: {html.bold(data['trues'])} ta to'g'ri va {html.bold(data['falses'])} ta noto'g'ri\n\n"\
-                                    f"/hozirgiholat_{code}\n"\
-                                    f"/tugatish_{code}"
+                                    f"/joriygiholat_{code}\n"\
+                                    f"/toxtatish_{code}"
                             await bot.send_message(
                                 chat_id=get_test_me.get('telegram_id'),
                                 text= cont,
@@ -162,16 +148,16 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
             else:
                 
                 matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-           f"{html.pre('!!test_kodi!!1a2b3c4d....30b')}\n\n\n"\
+           f"{html.pre('%%test_kodi%%1a2b3c4d....30b')}\n\n\n"\
            
                 await message.answer(matn)
 
-@dp.message(F.text.startswith('/hozirgiholat'))
+@dp.message(F.text.startswith('/joriygiholat'))
 async def start_handler(message: Message):
     parts = message.text.split("_", 1)
     code = parts[1]
     data = await get_results(code=code)
-    test = await get_test_school(id=code)
+    test = await get_test(id=code)
     telegram_id_=test.get('telegram_id',None)
     sorted_data = sorted(data, key=lambda x: int(x['trues']), reverse=True)
     text_me = ''
@@ -188,13 +174,13 @@ async def start_handler(message: Message):
 
 
     await message.answer(html.bold(context))
-@dp.message(F.text.startswith('/tugatish'))
+@dp.message(F.text.startswith('/toxtatish'))
 async def start_handler(message: Message):
     try:
         parts = message.text.split("_", 1)
         code = parts[1]
         data = await get_results(code=code)
-        test = await get_test_school(id=code)
+        test = await get_test(id=code)
         telegram_id_=test.get('telegram_id',0)
         if int(telegram_id_) == message.from_user.id:
             user = await get_user(telegram_id=int(telegram_id_))
@@ -216,7 +202,7 @@ async def start_handler(message: Message):
                 if degree__:
                     name = i.get('name',None)
                     telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))}\n"
+                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} \n"
                     counter_+=1
                 else:
                     name = i.get('name',None)
@@ -252,8 +238,8 @@ async def start_handler(message: Message):
                 await bot.send_message(
                     
                     text=html.bold(context),
-                    chat_id=i['telegram_id'],reply_markup=button_sertificate_school(
-                        name=student_,author=author,degree=score,subject = test.get('subject','None'),class_number=test.get('class_number','None')
+                    chat_id=i['telegram_id'],reply_markup=button_sertificate_simple(
+                        name=student_,author=author,degree=score
                     )
                 ) 
             await delete_result_(code=int(code))
@@ -306,11 +292,11 @@ async def start_handler(message: Message):
 from aiogram.types import CallbackQuery
 from write_sertificate import *
 from aiogram.types import BufferedInputFile
-@dp.callback_query(SchoolCallback.filter())
+@dp.callback_query(SimpleCallback.filter())
 async def handle_view(callback: CallbackQuery, callback_data: SchoolCallback):
     print(callback_data)
     await callback.answer()
-    image_bytes = write_school_image(author=callback_data.author,student=callback_data.name,degree=callback_data.degree,class_number=callback_data.class_number,subject=callback_data.subject)
+    image_bytes = write_simple_image(author=callback_data.author,student=callback_data.name,degree=callback_data.degree)
     photo = BufferedInputFile(
         image_bytes.read(),
         filename="image1.png"

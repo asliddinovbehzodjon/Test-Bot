@@ -134,5 +134,24 @@ async def delete_answer_(id):
        db.delete_answers(id=id)
     except:
         return "Bad"
-if __name__=='__main__':
-    print(asyncio.run(delete_result_(1)))
+# ######################
+
+async def delete_answer_school_(id):
+    try:
+       db.delete_answers_school(id=id)
+    except:
+        return "Bad"
+async def create_answers_school(answers:str=None,telegram_id:str=None,type_test:str=None,class_number:str=None,subject:str=None,code:str=None):
+    try:
+        id =  db.add_test_school(answers=answers,telegram_id=telegram_id,code=code,type_test=type_test,class_number=class_number,subject=subject)
+        return id
+         
+    except Exception as e:
+        print(e)
+        pass
+async def get_test_school(id):
+    try:
+        data = db.select_test_school(id=id)
+        return data
+    except:
+        return {}

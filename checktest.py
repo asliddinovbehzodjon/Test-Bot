@@ -34,22 +34,26 @@ async def checkformat(answers:str):
     else:
         return False
 async def checkformatschool(answers:str):
-    if answers.startswith('$$'):
-        
+    if answers.startswith('@@'):  
             try:
-                cut = answers.rfind('$$')
+                cut = answers.rfind('@@') + 2
+                print(cut)
                 javoblar = answers[cut:]
+                print(javoblar)
                 keys = re.findall(r'\d+', javoblar)
                 values = re.findall(r'[a-zA-Z]', javoblar)
+                print(keys,values)
                 if len(keys) == len(values):
                     data = {}
+                    data['test_code'] =answers[2:answers.rfind('@@')]
                     data['answers'] = await gototrueformat(answers=javoblar)
                     data['answers_string'] =javoblar
                     data['len'] = len(await gototrueformat(answers=javoblar))
                     return data
                 else:
                     return False
-            except:
+            except Exception as e:
+                print(e)
                 return False
        
     else:
@@ -237,4 +241,83 @@ async def check_answers_2(trueanswers,answers):
     return data
 
 
-
+import re
+def parse_data(text: str):
+    pattern = r"\$\$(.*?)\$\$(.*?)\$\$(.*)"
+    match = re.match(pattern, text)
+    
+    if match:
+        return True
+    else:
+        return False
+def parse_format(text: str):
+    parts = text.split("$$")
+    # split result: ['', 'class_number', 'subject', '1a2b3c4d']
+    
+    if len(parts) >= 4:
+        class_number = parts[1]
+        subject = parts[2]
+        answers = parts[3]
+        return [class_number, subject, answers]
+    
+    return []
+async def checkformat_school(answers:str):
+    if answers.startswith('$$'):
+        if answers.count('$')==6:
+            try:
+                if parse_data(answers):
+                    data_me = parse_format(answers)
+                    if data_me==[]:
+                        pass
+                    else:
+                        javoblar = data_me[2]
+                        keys = re.findall(r'\d+', javoblar)
+                        values = re.findall(r'[a-zA-Z]', javoblar)
+                        if len(keys) == len(values):
+                            data = {}
+                            data['class_number'] =data_me[0]
+                            data['subject'] = data_me[1]
+                            data['answers'] = await gototrueformat(answers=javoblar)
+                            data['answers_string'] =javoblar
+                            data['len'] = len(await gototrueformat(answers=javoblar))
+                            return data
+                        else:
+                            return False
+                else:
+                    return False
+            except Exception as e:
+               
+                return False
+        else:
+            return False
+    else:
+        return False
+async def checkformat_2305(answers:str):
+   
+    if answers.startswith('%%'):
+       
+        if answers.count('%')==4:
+           
+            try:
+                cut = answers.rfind('%%') + 2
+                javoblar = answers[cut:]
+                keys = re.findall(r'\d+', javoblar)
+                values = re.findall(r'[a-zA-Z]', javoblar)
+                if len(keys) == len(values):
+                   
+                    data = {}
+                    data['test_code'] =answers[2:answers.rfind('%%')]
+                    data['answers'] = await gototrueformat(answers=javoblar)
+                    data['answers_string'] =javoblar
+                    data['len'] = len(await gototrueformat(answers=javoblar))
+                    return data
+                else:
+                    return False
+            except:
+                return False
+        else:
+            return False
+    else:
+        return False
+if __name__ =='__main__':
+    print(asyncio.run(checkformatschool('@@a12b3d')))

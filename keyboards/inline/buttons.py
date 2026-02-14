@@ -115,15 +115,37 @@ class SchoolCallback(CallbackData, prefix="schol"):
     name: str
     author:str
     degree:str
+    subject:str
+    class_number:str
    
-def button_sertificate_school(name,author,degree):
+def button_sertificate_school(name,author,degree,subject,class_number):
     from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
             [
                 InlineKeyboardButton(
                     text="📜 Sertifikatni yuklab olish",
-                    callback_data=SchoolCallback(name=name,author=author,degree=degree).pack()
+                    callback_data=SchoolCallback(name=name,author=author,degree=degree,subject=subject,class_number=class_number).pack()
+                ),
+               
+            ]
+        ]
+    )
+    return keyboard
+class SimpleCallback(CallbackData, prefix="simple"):
+    name: str
+    author:str
+    degree:str
+    
+   
+def button_sertificate_simple(name,author,degree):
+    from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="📜 Sertifikatni yuklab olish",
+                    callback_data=SimpleCallback(name=name,author=author,degree=degree).pack()
                 ),
                
             ]

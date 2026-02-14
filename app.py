@@ -20,6 +20,7 @@ async def main():
             db.create_table_users()
             db.create_table_channels()
             db.create_table_answers()
+            db.create_table_answers_school()
         except Exception as e:
             print(e)
             pass

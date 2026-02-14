@@ -125,7 +125,7 @@ class Database:
 #  Create table test  answers
     def create_table_answers(self):
         sql = """
-        CREATE TABLE Answers (
+        CREATE TABLE AnswersAttestat (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             code varchar(250) NULL UNIQUE,
             answers varchar(250) NULL,
@@ -145,7 +145,7 @@ class Database:
     def add_test(self, code: int = None, answers: str = None,type_test:str=None,telegram_id:str=None):
         try:
             sql = """
-        INSERT INTO Answers(code,answers,type_test,telegram_id) VALUES(?,?,?,?)
+        INSERT INTO AnswersAttestat(code,answers,type_test,telegram_id) VALUES(?,?,?,?)
         """
             data = self.execute(sql, parameters=(code, answers,type_test,telegram_id), commit=True)
             return data
@@ -154,7 +154,7 @@ class Database:
 
  
     def select_test(self, **kwargs):
-        sql = "SELECT * FROM Answers WHERE "
+        sql = "SELECT * FROM AnswersAttestat WHERE "
         sql, parameters = self.format_args(sql, kwargs)
         i = self.execute(sql, parameters=parameters, fetchone=True)
         if i:
@@ -170,7 +170,7 @@ class Database:
 
     def delete_answers(self,id):
         sql = f"""
-        DELETE FROM Answers WHERE id=?
+        DELETE FROM AnswersAttestat WHERE id=?
         """
         return self.execute(sql, parameters=(id,), commit=True)
     # Create Channel Table
@@ -319,4 +319,58 @@ class Database:
         DELETE FROM Results WHERE code=?
         """
         return self.execute(sql, parameters=(code,), commit=True)
-        
+#  Create table test  answers
+    def create_table_answers_school(self):
+        sql = """
+        CREATE TABLE AnswersSchool(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            code varchar(250) NULL UNIQUE,
+            answers varchar(250) NULL,
+            type_test varchar(250) NULL,
+            class_number varchar(250) NULL,
+            subject varchar(250) NULL,
+            telegram_id varchar(250)
+            );
+"""
+        self.execute(sql, commit=True)
+
+    @staticmethod
+    def format_args(sql, parameters: dict):
+        sql += " AND ".join([
+            f"{item} = ?" for item in parameters
+        ])
+        return sql, tuple(parameters.values())
+
+    def add_test_school(self, code: int = None, answers: str = None,type_test:str=None,class_number:str=None,subject:str=None,telegram_id:str=None):
+        try:
+            sql = """
+        INSERT INTO AnswersSchool(code,answers,type_test,class_number,subject,telegram_id) VALUES(?,?,?,?,?,?)
+        """
+            data = self.execute(sql, parameters=(code, answers,type_test,class_number,subject,telegram_id), commit=True)
+            return data
+        except:
+            self.connection.close()
+
+ 
+    def select_test_school(self, **kwargs):
+        sql = "SELECT * FROM AnswersSchool WHERE "
+        sql, parameters = self.format_args(sql, kwargs)
+        i = self.execute(sql, parameters=parameters, fetchone=True)
+        if i:
+            channel_info = {
+                'code': i[0],
+                'answers': i[2],
+                'type_test': i[3],
+                'class_number': i[4],
+                'subject': i[5],
+                'telegram_id': i[6]
+            }
+            return channel_info
+        else:
+            return {}
+
+    def delete_answers_school(self,id):
+        sql = f"""
+        DELETE FROM AnswersSchool WHERE id=?
+        """
+        return self.execute(sql, parameters=(id,), commit=True)      

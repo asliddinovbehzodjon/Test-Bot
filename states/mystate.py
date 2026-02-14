@@ -31,4 +31,6 @@ class AttestatTestCreate(StatesGroup):
     create = State()
 class SchoolTestCreate(StatesGroup):
     create = State()
+class SimpleTestCreate(StatesGroup):
+    create = State()
     
