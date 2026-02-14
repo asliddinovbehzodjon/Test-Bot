@@ -49,8 +49,8 @@ def write_attestat_image(degree,author,student,channel):
         print("Custom font not found, using default.")
 
     # 5. Add the text to the image
-    draw.text(position_name, name, fill=text_color, font=font_name)
-    draw.text(position_author, author, fill=text_color, font=font_author)
+    draw.text(position_name, name.capitalize(), fill=text_color, font=font_name)
+    draw.text(position_author, author.capitalize(), fill=text_color, font=font_author)
     draw.text(position_date, today, fill=text_color, font=font_date)
     wrapped_text = textwrap.fill(degree_, width=100)
     draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
@@ -96,8 +96,8 @@ def write_school_image(degree,author,student):
         font_degree_ = ImageFont.load_default()  
 
     # 5. Add the text to the image
-    draw.text(position_name, name, fill=text_color, font=font_name)
-    draw.text(position_author, author, fill=text_color, font=font_author)
+    draw.text(position_name, name.capitalize(), fill=text_color, font=font_name)
+    draw.text(position_author, author.capitalize(), fill=text_color, font=font_author)
     draw.text(position_date, today, fill=text_color, font=font_date)
     wrapped_text = textwrap.fill(degree_, width=100)
     draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
