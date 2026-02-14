@@ -14,6 +14,7 @@ from states.mystate import *
 def tekst(code,questions):
     tekst_=f"<b>✅Test bazaga qo`shildi.</b>\n"\
     f"<b>Test kodi: {code}</b>\n"\
+    f"<b>Test turi: 🔍 Attestatsiya</b>\n"\
     f"<b>Savollar soni: {questions} ta.</b>\n"\
     f"<b>Quyidagi tayyor izohni o'quvchilaringizga yuborishingiz mumkin</b>\n"\
     f"<b>👇👇👇</b>\n"
@@ -21,7 +22,8 @@ def tekst(code,questions):
 def tekst2(creator,questions,code,bot_username,user_id):  
     tekst_2 =  f"📝📝Test boshlandi.\n\n\n"\
     f"👤 Test muallifi:    {html.link(value=creator,link=f'tg://user?id={user_id}')}\n\n\n"\
-    f"ℹ️ Savollar soni: {questions} ta\n\n"\
+    f"ℹ️ Test turi:🔍 Attestatsiya\n\n"\
+    f"ℹ️ Savollar soni: {questions} ta\n\n\n"\
     f"ℹ️ Test kodi: {code}\n\n\n"\
     f"🔴 Javoblaringizni @{bot_username} ga quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
     f"{html.pre('++test_kodi++1a2b3c4d....50')}\n\n\n"\
