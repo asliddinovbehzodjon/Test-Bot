@@ -5,7 +5,7 @@ from telegraph.aio import Telegraph
 from aiogram.filters import Command
 from keyboards.default.buttons import *
 
-@dp.message(F.text=="Bot haqida ma’lumot")
+@dp.message(F.text=="🤖 Bot haqida ma’lumot")
 async def test(message:types.Message):
     text = f"@Aqilli_testbot haqida to'liq ma'lumotni @Aqilli_testbot_haqida kanalidan o'qib olishingiz mumkin.\n"\
 f"(Kanalga a'zo bo'lish majburiy emas, shunchaki kirib botning imkoniyatlari bilan tanishib chiqishingiz mumkin)"

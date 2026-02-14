@@ -12,7 +12,7 @@ from middlewares.mymiddleware import *
 from aiogram.fsm.context import FSMContext
 from states.mystate import *
 # Check Answers With Write by Hand
-@dp.message(F.text.startswith('Mening ma’lumotlarim'))
+@dp.message(F.text.startswith('🪪 Mening ma’lumotlarim'))
 async def attestat(message:types.Message,state:FSMContext):
       user_id = message.from_user.id
       user =  await get_user(telegram_id=user_id)

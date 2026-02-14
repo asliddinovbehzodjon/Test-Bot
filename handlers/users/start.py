@@ -12,6 +12,13 @@ def text(fullname):
             f"<i>🤖 Men sizga test tekshirishga yordam beraman!</i>\n"
            
             )
+@dp.message(F.text=="❌ Bekor qilish")
+async def show_channels(message: types.Message,state:FSMContext):
+  
+      await message.answer(
+        "🔝 Asosiy Menyu",reply_markup=main_button()
+      )
+      await state.clear()
 @dp.message(Command('start'))
 async def show_channels(message: types.Message,state:FSMContext):
    user = await get_user(message.from_user.id)

@@ -30,7 +30,7 @@ def tekst2(creator,questions,code,bot_username,user_id):
     return tekst_2
     
 # Check Answers With Write by Hand
-@dp.message((F.text == "Maktab testlari"))
+@dp.message((F.text == "🏫 Maktab testlari"))
 async def attestat(message:types.Message,state:FSMContext):
            await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
@@ -106,14 +106,14 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                 else:
                     if get_test_me.get('answers',None):
                         info_2 = await checkformat_3(f"!!{get_test_me['code']}!!{get_test_me['answers']}")
-                        data = await check_answers(
+                        data = await check_answers_2(
                             trueanswers=info_2['answers'],answers=info['answers']
                         )
                         await message.answer(f"{html.bold('👤 Foydalanuvchi: ')}\n\n"\
                             f"{html.bold(html.link(value=f'{message.from_user.full_name}',link=f'tg://user?id={message.from_user.id}'))}\n\n"\
                             f"{html.bold(f'📖 Test kodi: {code}')}\n" \
                             f"{data['result']}\n\n\n\n\n\n"\
-                            f"<b>'🎉🎉🎉</b>'{html.bold(value=data['level'])}\n\n\n\n\n" \
+                            f"<b>'🎉🎉🎉 Testda ishtirok etganingiz uchun tashakkur!</b>\n'{html.bold(value=data['level'])}\n\n\n\n\n" \
                             f"{html.bold(value=val)}" 
                                 
                         )

@@ -193,7 +193,46 @@ async def info_degree_(all,trues):
         toifa= ''
     return toifa
 
-
+async def check_answers_2(trueanswers,answers):
+    text = ''
+    tr=0
+    fl = 0
+    med  = []
+    for i in trueanswers:
+        if trueanswers.get(i) == answers.get(i):
+            tr+=1
+            med.append(f'{i}.{trueanswers.get(i)} ✅')
+        else:
+            fl+=1  
+            med.append(f'{i}.{trueanswers.get(i)} ❌')        
+    all = tr+fl
+    score = tr*100 / all
+    level = ''
+    print(med)
+    lines = []
+    text_=''
+    for i in range(0, len(med),3):
+        row = med[i:i+3]
+        text_+="\t\t\t".join("{}".format(x) for x in row)+'\n'
+    
+    score = "{:.2f}".format(score)
+    toifa = f"🎯 Siz testdan {score} % lik natijani qo'lgan kiritdiz"
+    now = datetime.now()
+    now_date = now.strftime("%m.%d.%Y")
+    now_hour = now.strftime("%H:%M:%S")
+    text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"
+          f"❌ Xato javoblar: <b>{fl}</b> ta\n"
+          f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"
+           f"🗓️ {now_date} ⏱️ {now_hour}")
+    data = {}
+    data['result'] = text
+    data['trues'] = tr
+    data['falses']  = fl
+    data['score'] = score
+    data['level']=level
+    data['text_']=text_
+    data['toifa']=toifa
+    return data
 
 
 

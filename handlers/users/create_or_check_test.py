@@ -30,7 +30,7 @@ def tekst2(creator,questions,code,bot_username,user_id):
     return tekst_2
     
 # Check Answers With Write by Hand
-@dp.message((F.text == "Attestatsiya testlari"))
+@dp.message((F.text == "🔍 Attestatsiya testlari"))
 async def attestat(message:types.Message,state:FSMContext):
      
            await message.answer(

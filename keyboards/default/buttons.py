@@ -67,10 +67,10 @@ def main_button():
     button = ReplyKeyboardBuilder()
 
     button.row(
-        KeyboardButton(text="Attestatsiya testlari"),
-        KeyboardButton(text="Maktab testlari"),
-        KeyboardButton(text='Mening ma’lumotlarim'),
-        KeyboardButton(text="Bot haqida ma’lumot"),
+        KeyboardButton(text="🔍 Attestatsiya testlari"),
+        KeyboardButton(text="🏫 Maktab testlari"),
+        KeyboardButton(text='🪪 Mening ma’lumotlarim'),
+        KeyboardButton(text="🤖 Bot haqida ma’lumot"),
         KeyboardButton(text="Sertifikat tanlash")
     )
     button.adjust(2)
