@@ -43,7 +43,7 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                text=  f"<b>##1a2b3c4d....50b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
            await state.set_state(AttestatTestCreate.create)
-
+from aiogram.types import ReplyKeyboardRemove
 @dp.message((F.text.startswith('##') | (F.text=="❌ Bekor qilish")),AttestatTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
@@ -70,7 +70,8 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                 tekst(
                     code = created,
                     questions=info.get('len',None)
-                )
+                ),
+                reply_markup=ReplyKeyboardRemove()
             )
             await message.answer(
                 html.bold(
@@ -82,7 +83,8 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                     bot_username=bot_username
                     
                 )
-                )
+                ),
+                reply_markup=ReplyKeyboardRemove()
             )            
             await state.clear()
            

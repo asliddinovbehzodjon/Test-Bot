@@ -10,6 +10,7 @@ from environs import Env
 from keyboards.default.buttons import *
 from middlewares.mymiddleware import *
 from aiogram.fsm.context import FSMContext
+from aiogram.types import *
 from states.mystate import *
 def tekst(code,questions):
     tekst_=f"<b>✅Test bazaga qo`shildi.</b>\n"\
@@ -69,7 +70,8 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                 tekst(
                     code = created,
                     questions=info.get('len',None)
-                )
+                ),
+                reply_markup=ReplyKeyboardRemove()
             )
             await message.answer(
                 html.bold(
@@ -81,7 +83,8 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                     bot_username=bot_username
                     
                 )
-                )
+                ),
+                reply_markup=ReplyKeyboardRemove()
             )            
             await state.clear()
            
