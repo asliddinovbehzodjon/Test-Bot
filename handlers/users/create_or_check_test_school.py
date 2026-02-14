@@ -119,7 +119,7 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                             f"{html.bold(html.link(value=f'{message.from_user.full_name}',link=f'tg://user?id={message.from_user.id}'))}\n\n"\
                             f"{html.bold(f'📖 Test kodi: {code}')}\n" \
                             f"{data['result']}\n\n\n\n\n\n"\
-                            f"<b>'🎉🎉🎉 Testda ishtirok etganingiz uchun tashakkur!</b>\n'{html.bold(value=data['level'])}\n\n\n\n\n" \
+                            f"<b>🎉🎉🎉 Testda ishtirok etganingiz uchun tashakkur!</b>\n{html.bold(value=data['toifa'])}\n\n\n\n\n" \
                             f"{html.bold(value=val)}" 
                                 
                         )
