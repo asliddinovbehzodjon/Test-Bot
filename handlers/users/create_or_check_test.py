@@ -39,7 +39,7 @@ async def attestat(message:types.Message,state:FSMContext):
               text=f"⬆️ Kerakli bo'limni tanlang.",
               reply_markup=test_button_attestat()  )
 # Check Answers With Write by Hand
-@dp.message((F.text =="✍️ Test Yaratish") )
+@dp.message((F.text =="➕ Attestatsiya Testi Yaratish") )
 async def attestat_create_test(message:types.Message,state:FSMContext):
            await message.answer(
                text=  f"<b>##1a2b3c4d....50b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
@@ -91,7 +91,7 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
             await state.clear()
            
 # Check 
-@dp.message((F.text =="✅ Test tekshirish") )
+@dp.message((F.text =="✅ Attestatsiya Testini tekshirish") )
 async def attestat_check_test(message:types.Message,state:FSMContext):
            matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
            f"{html.pre('++test_kodi++1a2b3c4d....50b')}\n\n\n"\

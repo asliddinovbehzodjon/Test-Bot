@@ -101,8 +101,8 @@ def test_button_attestat():
     button = ReplyKeyboardBuilder()
    
     button.row(
-        KeyboardButton(text="✍️ Test Yaratish"),
-        KeyboardButton(text="✅ Test tekshirish"),
+        KeyboardButton(text="➕ Attestatsiya Testi Yaratish"),
+        KeyboardButton(text="✅ Attestatsiya Testini tekshirish"),
         KeyboardButton(text="⬅️ Orqaga"),
         
     )
@@ -112,8 +112,8 @@ def test_button_school():
     button = ReplyKeyboardBuilder()
    
     button.row(
-        KeyboardButton(text="📕 Test Yaratish"),
-        KeyboardButton(text="🖍 Test tekshirish"),
+        KeyboardButton(text="➕ Maktab Testi Yaratish"),
+        KeyboardButton(text="✅ Maktab Testini tekshirish"),
         KeyboardButton(text="⬅️ Orqaga"),
         
     )
