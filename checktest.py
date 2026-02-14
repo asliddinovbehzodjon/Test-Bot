@@ -143,11 +143,11 @@ async def check_answers(trueanswers,answers):
     now = datetime.now()
     now_date = now.strftime("%m.%d.%Y")
     now_hour = now.strftime("%H:%M:%S")
-    text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"
-          f"❌ Xato javoblar: <b>{fl}</b> ta\n"
-          f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"
-           f"🗓️ {now_date} ⏱️ {now_hour}",
-           f"✅ Maktab testi")
+    text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"\
+          f"❌ Xato javoblar: <b>{fl}</b> ta\n"\
+          f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"\
+           f"🗓️ {now_date} ⏱️ {now_hour}\n\n"\
+           f"✅ Attestatsiya testi")
     data = {}
     data['result'] = text
     data['trues'] = tr
@@ -221,10 +221,10 @@ async def check_answers_2(trueanswers,answers):
     now = datetime.now()
     now_date = now.strftime("%m.%d.%Y")
     now_hour = now.strftime("%H:%M:%S")
-    text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"
-          f"❌ Xato javoblar: <b>{fl}</b> ta\n"
-          f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"
-           f"🗓️ {now_date} ⏱️ {now_hour}"
+    text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"\
+          f"❌ Xato javoblar: <b>{fl}</b> ta\n"\
+          f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"\
+           f"🗓️ {now_date} ⏱️ {now_hour}\n\n"\
            f"✅ Maktab testi")
           
     data = {}
