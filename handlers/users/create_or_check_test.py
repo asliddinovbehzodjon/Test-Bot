@@ -93,6 +93,7 @@ async def attestat_check_test(message:types.Message,state:FSMContext):
            f"{html.pre('++test_kodi++1a2b3c4d....50b')}\n\n\n"\
            
            await message.answer(matn)
+from aiogram.types import ReplyKeyboardRemove
 @dp.message((F.text.startswith('++')))
 async def attestat_check_test(message:types.Message,state:FSMContext):
             
@@ -118,7 +119,7 @@ async def attestat_check_test(message:types.Message,state:FSMContext):
                             f"{html.bold(value=val)}" 
                                 
                         )
-                        await message.answer(html.bold(data['text_']))
+                        await message.answer(html.bold(data['text_']),reply_markup=ReplyKeyboardRemove())
                         await create_results(
                             code = code,
                             name = message.from_user.full_name,
@@ -133,7 +134,8 @@ async def attestat_check_test(message:types.Message,state:FSMContext):
                                     f"/yakunlash_{code}"
                             await bot.send_message(
                                 chat_id=get_test_me.get('telegram_id'),
-                                text= cont
+                                text= cont,
+                                reply_markup=ReplyKeyboardRemove()
                             )
                         except:
                             pass
