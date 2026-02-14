@@ -10,15 +10,15 @@ def write_attestat_image(degree,author,student,channel):
     # 3. Define the text and position
     name = f"{student}"
     if  float(degree) >85.9:  
-        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} % natija ko‘rsatib, belgilangan talablar asosida 'Oliy malaka toifasi va 70 foizlik ustamani' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} % natija ko‘rsatib, belgilangan talablar asosida 'Oliy malaka toifasi va 70 foizlik ustama'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 79.9<float(degree)<86:
-        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'oliy malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'oliy malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 69.9<float(degree)<80:
-        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+        degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 59.9<float(degree)<70:
-        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 54.9<float(degree)<60:
-        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'Mutahasis malaka toifasini' qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'Mutahasis malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     else:
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida ishtirok etib, test natijalariga asosan {degree} ball to'plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
         
