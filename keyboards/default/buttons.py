@@ -111,7 +111,7 @@ def test_button_attestat():
     return button.as_markup(resize_keyboard=True, one_time_keyboard=True)
 def test_button_school():
     button = ReplyKeyboardBuilder()
-   
+    
     button.row(
         KeyboardButton(text="➕ Maktab test yaratish"),
         KeyboardButton(text="✅ Maktab testini tekshirish"),

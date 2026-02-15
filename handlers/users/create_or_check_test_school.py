@@ -35,7 +35,7 @@ def tekst2(creator,questions,code,bot_username,user_id,class_number,subject):
     return tekst_2
                 
 # Check Answers With Write by Hand
-@dp.message((F.text == "🏫 Maktab testlari"))
+@dp.message((F.text == "🏫 Maktab test"))
 async def attestat(message:types.Message,state:FSMContext):
            await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
