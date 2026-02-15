@@ -67,9 +67,9 @@ def main_button():
     button = ReplyKeyboardBuilder()
 
     button.row(
-        KeyboardButton(text="🔍 Attestatsiya testlari"),
-        KeyboardButton(text="🧮 Testlar"),
-        KeyboardButton(text="🏫 Maktab testlari"),
+        KeyboardButton(text="🔍 Attestatsiya test"),
+        KeyboardButton(text="🧮 Oddiy test"),
+        KeyboardButton(text="🏫 Maktab test"),
         KeyboardButton(text='🪪 Mening ma’lumotlarim'),
         KeyboardButton(text="🤖 Bot haqida ma’lumot"),
         KeyboardButton(text="Sertifikat tanlash")
@@ -102,8 +102,8 @@ def test_button_attestat():
     button = ReplyKeyboardBuilder()
    
     button.row(
-        KeyboardButton(text="➕ Attestatsiya Testi Yaratish"),
-        KeyboardButton(text="✅ Attestatsiya Testini tekshirish"),
+        KeyboardButton(text="➕ Attestatsiya test yaratish"),
+        KeyboardButton(text="✅ Attestatsiya testini tekshirish"),
         KeyboardButton(text="⬅️ Orqaga"),
         
     )
@@ -113,8 +113,8 @@ def test_button_school():
     button = ReplyKeyboardBuilder()
    
     button.row(
-        KeyboardButton(text="➕ Maktab Testi Yaratish"),
-        KeyboardButton(text="✅ Maktab Testini tekshirish"),
+        KeyboardButton(text="➕ Maktab test yaratish"),
+        KeyboardButton(text="✅ Maktab testini tekshirish"),
         KeyboardButton(text="⬅️ Orqaga"),
         
     )
@@ -124,9 +124,19 @@ def test_button_simple():
     button = ReplyKeyboardBuilder()
    
     button.row(
-        KeyboardButton(text="➕ Test Yaratish"),
-        KeyboardButton(text="✅ Testni tekshirish"),
+        KeyboardButton(text="➕ Oddiy test yaratish"),
+        KeyboardButton(text="✅ Oddiy testni tekshirish"),
         KeyboardButton(text="⬅️ Orqaga"),
+        
+    )
+    button.adjust(2)
+    return button.as_markup(resize_keyboard=True, one_time_keyboard=True)
+def test_button_back():
+    button = ReplyKeyboardBuilder()
+   
+    button.row(
+        
+        KeyboardButton(text="⬅️ Orqaga")
         
     )
     button.adjust(2)

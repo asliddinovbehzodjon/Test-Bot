@@ -41,14 +41,14 @@ async def attestat(message:types.Message,state:FSMContext):
               text=f"⬆️ Kerakli bo'limni tanlang.",
               reply_markup=test_button_school()  )
 # Check Answers With Write by Hand
-@dp.message((F.text =="➕ Maktab Testi Yaratish") )
+@dp.message((F.text =="➕ Maktab test yaratish") )
 async def attestat_create_test(message:types.Message,state:FSMContext):
            await message.answer(
-               text=  f"<b>$$sinf_raqami$$fan_nomi$$1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
+               text=  f"<b>**sinf_raqami**fan_nomi**1a2b3c4d....50b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
            await state.set_state(SchoolTestCreate.create)
 
-@dp.message((F.text.startswith('$$') | (F.text=="❌ Bekor qilish")),SchoolTestCreate.create )
+@dp.message((F.text.startswith('**') | (F.text=="❌ Bekor qilish")),SchoolTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
         if text =="❌ Bekor qilish":
@@ -80,7 +80,7 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                         code = created,
                         questions=info.get('len',None)
                     ),
-                    reply_markup=ReplyKeyboardRemove()
+                   reply_markup=test_button_back()
                 )
                 await message.answer(
                     html.bold(
@@ -95,16 +95,16 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                         
                     )
                     ),
-                    reply_markup=ReplyKeyboardRemove()
+                    reply_markup=test_button_back()
                 )            
                 await state.clear()
             else:
                await message.answer(
-               text=  f"<b>$$sinf_raqami$$fan_nomi$$1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
+               text=  f"<b>**sinf_raqami**fan_nomi**1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
                await state.set_state(SchoolTestCreate.create)
 # Check 
-@dp.message((F.text =="✅ Maktab Testini tekshirish") )
+@dp.message((F.text =="✅ Maktab testini tekshirish") )
 async def attestat_check_test(message:types.Message,state:FSMContext):
            matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
            f"{html.pre('!!test_kodi!!1a2b3c4d....50b')}\n\n\n"\
@@ -162,7 +162,7 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
             else:
                 
                 matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-           f"{html.pre('!!test_kodi!!1a2b3c4d....30b')}\n\n\n"\
+           f"{html.pre('!!test_kodi!!1a2b3c4d....50b')}\n\n\n"\
            
                 await message.answer(matn)
 

@@ -243,7 +243,7 @@ async def check_answers_2(trueanswers,answers):
 
 import re
 def parse_data(text: str):
-    pattern = r"\$\$(.*?)\$\$(.*?)\$\$(.*)"
+    pattern = r"\*\*(.*?)\*\*(.*?)\*\*(.*)"
     match = re.match(pattern, text)
     
     if match:
@@ -251,7 +251,7 @@ def parse_data(text: str):
     else:
         return False
 def parse_format(text: str):
-    parts = text.split("$$")
+    parts = text.split("**")
     # split result: ['', 'class_number', 'subject', '1a2b3c4d']
     
     if len(parts) >= 4:
@@ -262,8 +262,8 @@ def parse_format(text: str):
     
     return []
 async def checkformat_school(answers:str):
-    if answers.startswith('$$'):
-        if answers.count('$')==6:
+    if answers.startswith('**'):
+        if answers.count('*')==6:
             try:
                 if parse_data(answers):
                     data_me = parse_format(answers)

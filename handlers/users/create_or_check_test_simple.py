@@ -32,13 +32,13 @@ def tekst2(creator,questions,code,bot_username,user_id):
     return tekst_2
     
 # Check Answers With Write by Hand
-@dp.message((F.text == "🧮 Testlar"))
+@dp.message((F.text == "🧮 Oddiy test"))
 async def attestat(message:types.Message,state:FSMContext):
            await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
               reply_markup=test_button_simple()  )
 # Check Answers With Write by Hand
-@dp.message((F.text =="➕ Test Yaratish") )
+@dp.message((F.text =="➕ Oddiy test yaratish") )
 async def attestat_create_test(message:types.Message,state:FSMContext):
            await message.answer(
                text=  f"<b>@@1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
@@ -72,7 +72,7 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                     code = created,
                     questions=info.get('len',None)
                 ),
-                reply_markup=ReplyKeyboardRemove()
+                reply_markup=test_button_back()
             )
             await message.answer(
                 html.bold(
@@ -85,12 +85,12 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                     
                 )
                 ),
-                reply_markup=ReplyKeyboardRemove()
+               reply_markup=test_button_back()
             )            
             await state.clear()
            
 # Check 
-@dp.message((F.text =="✅ Testni tekshirish") )
+@dp.message((F.text =="✅ Oddiy testni tekshirish") )
 async def attestat_check_test(message:types.Message,state:FSMContext):
            matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
            f"{html.pre('%%test_kodi%%1a2b3c4d....50b')}\n\n\n"\

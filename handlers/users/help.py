@@ -3,11 +3,13 @@ from aiogram.filters import Command
 from loader import dp
 from write_sertificate import *
 from aiogram.types import BufferedInputFile
+from aiogram import types
+from loader import dp
+from aiogram import html
+from handlers.users.start import text
+
+
 @dp.message(Command('help'))
 async def bot_help(message: types.Message):
-    image_bytes = write_attestat_image(author='Behzod Asliddinov',student='Axmedov Fazliddin',degree=86,channel='@Korgazmali_talim')
-    photo = BufferedInputFile(
-        image_bytes.read(),
-        filename="image.png"
-    )
-    await message.answer_photo(photo=photo, caption="Generated image")
+    await message.answer(text(message.from_user.full_name))
+
