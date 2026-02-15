@@ -23,7 +23,7 @@ def write_attestat_image(degree,author,student,channel):
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida ishtirok etib, test natijalariga asosan {degree} ball to'plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
         
     # Coordinates (x, y) for the top-left corner of the text
-    position_name = (500, 330)
+    position_name = (400, 310)
     position_date = (330, 670) 
     position_degree_ = (250, 420) 
     position_author = (780, 670) 
@@ -36,10 +36,10 @@ def write_attestat_image(degree,author,student,channel):
     # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
     # You can download fonts from Google Fonts.
     try:
-        font_name = ImageFont.truetype("/bot/arial.ttf", 40) # Specify font file and size
+        font_name = ImageFont.truetype("/bot/arial.ttf", 65) # Specify font file and size
         font_date = ImageFont.truetype("/bot/arial.ttf", 30)
-        font_author = ImageFont.truetype("/bot/arial.ttf", 30)
-        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 21)
+        font_author = ImageFont.truetype("/bot/arial.ttf", 35)
+        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 25)
     except IOError:
         font_name = ImageFont.load_default() 
         font_author = ImageFont.load_default() 
@@ -52,7 +52,7 @@ def write_attestat_image(degree,author,student,channel):
     draw.text(position_name, name.capitalize(), fill=text_color, font=font_name)
     draw.text(position_author, author.capitalize(), fill=text_color, font=font_author)
     draw.text(position_date, today, fill=text_color, font=font_date)
-    wrapped_text = textwrap.fill(degree_, width=100)
+    wrapped_text = textwrap.fill(degree_, width=75)
     draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
         
     # 6. Save the resulting image
@@ -61,6 +61,7 @@ def write_attestat_image(degree,author,student,channel):
     image.save(bio, format="PNG")
     bio.seek(0)
     return bio
+    # return image.show()
 def write_simple_image(degree,author,student):  
     # 1. Open the image
     # Make sure "input_image.jpg" is in the same directory or provide the full path
@@ -72,7 +73,7 @@ def write_simple_image(degree,author,student):
     name = f"{student}"
     degree_=f"@Aqilli_testbot yordamida tashkil etilgan  test sinovlarida ishtirok etib, test natijalariga ko‘ra {degree} ball to‘plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
     # Coordinates (x, y) for the top-left corner of the text
-    position_name = (500, 330)
+    position_name = (400, 330)
     position_date = (330, 670) 
     position_degree_ = (250, 420) 
     position_author = (780, 670) 
@@ -85,10 +86,10 @@ def write_simple_image(degree,author,student):
     # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
     # You can download fonts from Google Fonts.
     try:
-        font_name = ImageFont.truetype("/bot/arial.ttf", 40) # Specify font file and size
+        font_name = ImageFont.truetype("/bot/arial.ttf", 65) # Specify font file and size
         font_date = ImageFont.truetype("/bot/arial.ttf", 30)
-        font_author = ImageFont.truetype("/bot/arial.ttf", 30)
-        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 21)
+        font_author = ImageFont.truetype("/bot/arial.ttf", 35)
+        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 30)
     except IOError:
         font_name = ImageFont.load_default() 
         font_author = ImageFont.load_default() 
@@ -99,9 +100,9 @@ def write_simple_image(degree,author,student):
     draw.text(position_name, name.capitalize(), fill=text_color, font=font_name)
     draw.text(position_author, author.capitalize(), fill=text_color, font=font_author)
     draw.text(position_date, today, fill=text_color, font=font_date)
-    wrapped_text = textwrap.fill(degree_, width=100)
+    wrapped_text = textwrap.fill(degree_, width=60)
     draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
-        
+   
     # 6. Save the resulting image
     bio = BytesIO()
     bio.name = "image1.png"   # IMPORTANT for Telegram
@@ -120,7 +121,7 @@ def write_school_image(degree,author,student,class_number,subject):
     name = f"{student}"
     degree_=f"@Aqilli_testbot yordamida tashkil etilgan {class_number}-sinf o‘quvchilari uchun {subject} fanidan o‘tkazilgan test sinovlarida ishtirok etib, test natijalariga ko‘ra {degree} ball to‘plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
     # Coordinates (x, y) for the top-left corner of the text
-    position_name = (500, 330)
+    position_name = (400, 330)
     position_date = (330, 670) 
     position_degree_ = (250, 420) 
     position_author = (780, 670) 
@@ -133,10 +134,10 @@ def write_school_image(degree,author,student,class_number,subject):
     # You need a TrueType Font (.ttf) file (e.g., "arial.ttf"). 
     # You can download fonts from Google Fonts.
     try:
-        font_name = ImageFont.truetype("/bot/arial.ttf", 40) # Specify font file and size
+        font_name = ImageFont.truetype("/bot/arial.ttf", 65) # Specify font file and size
         font_date = ImageFont.truetype("/bot/arial.ttf", 30)
-        font_author = ImageFont.truetype("/bot/arial.ttf", 30)
-        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 21)
+        font_author = ImageFont.truetype("/bot/arial.ttf", 35)
+        font_degree_ = ImageFont.truetype("/bot/arial.ttf", 25)
     except IOError:
         font_name = ImageFont.load_default() 
         font_author = ImageFont.load_default() 
@@ -147,7 +148,7 @@ def write_school_image(degree,author,student,class_number,subject):
     draw.text(position_name, name.capitalize(), fill=text_color, font=font_name)
     draw.text(position_author, author.capitalize(), fill=text_color, font=font_author)
     draw.text(position_date, today, fill=text_color, font=font_date)
-    wrapped_text = textwrap.fill(degree_, width=100)
+    wrapped_text = textwrap.fill(degree_, width=75)
     draw.multiline_text(position_degree_, wrapped_text, font=font_degree_, fill=text_color, spacing=10)
         
     # 6. Save the resulting image
@@ -157,3 +158,4 @@ def write_school_image(degree,author,student,class_number,subject):
     bio.seek(0)
     return bio
     # return image.show()
+# write_attestat_image(degree='55',author='Behzod',student='Asliddinov Behzod',channel='Behzod')

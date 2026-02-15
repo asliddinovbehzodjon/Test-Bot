@@ -117,7 +117,7 @@ async def get_name(message:types.Message,state:FSMContext):
 @dp.message(F.text.startswith("🔗 Kanalni o'zgartirish"))
 async def attestat(message:types.Message,state:FSMContext):
     await message.answer(
-      f"<b> Sertifikatda ko‘rinishi uchun kanalingiz nomini yozing (@ bilan)</b>\nMasalan: <b>@Bekhzod_Asliddinov</b>")
+      f"<b> Sertifikatda ko‘rinishi uchun kanalingiz nomini yozing (@ bilan)</b>\nMasalan: <b>@Korgazmali_Talim</b>")
   
     await state.set_state(UserChangeGroupData.group)
    
