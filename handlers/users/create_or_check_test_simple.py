@@ -244,7 +244,7 @@ async def start_handler(message: Message):
                 ) 
                 try:
                     from aiogram.types import BufferedInputFile
-                    image_bytes = write_simple_image(author=author,student=student,degree=score)
+                    image_bytes = write_simple_image(author=author,student=student_,degree=score)
                     photo = BufferedInputFile(
                         image_bytes.read(),
                         filename="image1.png"

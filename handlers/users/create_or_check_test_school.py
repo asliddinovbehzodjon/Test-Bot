@@ -257,7 +257,7 @@ async def start_handler(message: Message):
                     reply_markup=test_button_back()
                 ) 
                 try:
-                    image_bytes = write_school_image(author=author,student=student,degree=score,class_number=test.get('class_number',None),subject=test.get('subject',None))
+                    image_bytes = write_school_image(author=author,student=student_,degree=score,class_number=test.get('class_number',None),subject=test.get('subject',None))
                     photo = BufferedInputFile(
                     image_bytes.read(),
                     filename="image1.png"                    ) 
