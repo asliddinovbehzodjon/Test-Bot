@@ -11,6 +11,7 @@ from keyboards.default.buttons import *
 from middlewares.mymiddleware import *
 from aiogram.fsm.context import FSMContext
 from states.mystate import *
+from write_sertificate import * 
 def tekst(code,questions):
     tekst_=f"<b>✅Test bazaga qo`shildi.</b>\n"\
     f"<b>Test kodi: {code}</b>\n"\
@@ -46,10 +47,10 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
            )
            await state.set_state(AttestatTestCreate.create)
 from aiogram.types import ReplyKeyboardRemove
-@dp.message((F.text.startswith('##') | (F.text=="❌ Bekor qilish")),AttestatTestCreate.create )
+@dp.message((F.text.startswith('##') | (F.text=="🔙 Orqaga")),AttestatTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
-        if text =="❌ Bekor qilish":
+        if text =="🔙 Orqaga":
             await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
               reply_markup=main_button()  )
@@ -239,12 +240,22 @@ async def start_handler(message: Message):
                 await bot.send_message(
                     
                     text=html.bold(context),
-                    chat_id=i['telegram_id'],reply_markup=button_sertificate_attestat(
-                        name=student_,author=author,channel=channel,degree=score
-                    )
-                ) 
-            await delete_result_(code=int(code))
-            await delete_answer_(id=code)
+                    chat_id=i['telegram_id'],
+                     reply_markup=test_button_back()
+                )
+          
+                try:
+                    from aiogram.types import BufferedInputFile
+                    image_bytes = write_attestat_image(author=author,student=name,degree=degree__me,channel=channel)
+                    photo = BufferedInputFile(
+                    image_bytes.read(),
+                    filename="image.png"
+        )
+                    await bot.send_photo(photo=photo, chat_id=i['telegram_id'])
+                except:
+                    pass
+                await delete_result_(code=int(code))
+                await delete_answer_(id=code)
                 
         else:
             await message.answer(html.bold('Siz bu testni yakunlay olmaysiz!'))
@@ -290,17 +301,3 @@ async def start_handler(message: Message):
             await delete_answer_(id=code)
         else:
             raise e
-from aiogram.types import CallbackQuery
-from write_sertificate import *
-from aiogram.types import BufferedInputFile
-@dp.callback_query(ItemCallback.filter())
-async def handle_view(callback: CallbackQuery, callback_data: ItemCallback):
-
-    await callback.answer()
-    image_bytes = write_attestat_image(author=callback_data.author,student=callback_data.name,degree=callback_data.degree,channel=callback_data.channel)
-    photo = BufferedInputFile(
-        image_bytes.read(),
-        filename="image.png"
-    )
-    text_image = "@Aqilli_testbot haqida to'liq ma'lumotni @Aqilli_testbot_haqida kanalidan o'qib olishingiz mumkin."
-    await callback.message.answer_photo(photo=photo, caption=text_image)

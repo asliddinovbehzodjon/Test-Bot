@@ -12,6 +12,7 @@ from middlewares.mymiddleware import *
 from aiogram.fsm.context import FSMContext
 from aiogram.types import *
 from states.mystate import *
+from write_sertificate import *
 def tekst(code,questions):
     tekst_=f"<b>✅Test bazaga qo`shildi.</b>\n"\
     f"<b>Test kodi: {code}</b>\n"\
@@ -44,14 +45,14 @@ async def attestat(message:types.Message,state:FSMContext):
 @dp.message((F.text =="➕ Maktab test yaratish") )
 async def attestat_create_test(message:types.Message,state:FSMContext):
            await message.answer(
-               text=  f"<b>**sinf_raqami**fan_nomi**1a2b3c4d....50b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
+               text=  f"<b>==sinf_raqami==fan_nomi==1a2b3c4d....50b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
            await state.set_state(SchoolTestCreate.create)
 
-@dp.message((F.text.startswith('**') | (F.text=="❌ Bekor qilish")),SchoolTestCreate.create )
+@dp.message((F.text.startswith('==') | (F.text=="🔙 Orqaga")),SchoolTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
-        if text =="❌ Bekor qilish":
+        if text =="🔙 Orqaga":
             await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
               reply_markup=main_button()  )
@@ -100,7 +101,7 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                 await state.clear()
             else:
                await message.answer(
-               text=  f"<b>**sinf_raqami**fan_nomi**1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
+               text=  f"<b>==sinf_raqami==fan_nomi==1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
                await state.set_state(SchoolTestCreate.create)
 # Check 
@@ -216,12 +217,12 @@ async def start_handler(message: Message):
                 if degree__:
                     name = i.get('name',None)
                     telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))}\n"
+                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
                     counter_+=1
                 else:
                     name = i.get('name',None)
                     telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))}\n"
+                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
                     counter_+=1
                     
             data_me = await checkformat_2(javoblar=test['answers'])
@@ -252,10 +253,20 @@ async def start_handler(message: Message):
                 await bot.send_message(
                     
                     text=html.bold(context),
-                    chat_id=i['telegram_id'],reply_markup=button_sertificate_school(
-                        name=student_,author=author,degree=score,subject = test.get('subject','None'),class_number=test.get('class_number','None')
-                    )
+                    chat_id=i['telegram_id'],
+                    reply_markup=test_button_back()
                 ) 
+                try:
+                    image_bytes = write_school_image(author=author,student=name,degree=degree__me,class_number=test.get('class_number',None),subject=test.get('subject',None))
+                    photo = BufferedInputFile(
+                    image_bytes.read(),
+                    filename="image1.png"                    ) 
+                    await bot.send_photo(
+                        chat_id=i['telegram_id'],
+                        photo=photo
+                    )  
+                except:
+                    pass 
             await delete_result_(code=int(code))
             await delete_answer_(id=code)
                 

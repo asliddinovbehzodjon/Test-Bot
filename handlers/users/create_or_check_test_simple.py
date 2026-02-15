@@ -12,6 +12,7 @@ from middlewares.mymiddleware import *
 from aiogram.fsm.context import FSMContext
 from aiogram.types import *
 from states.mystate import *
+from write_sertificate import *
 def tekst(code,questions):
     tekst_=f"<b>✅Test bazaga qo`shildi.</b>\n"\
     f"<b>Test kodi: {code}</b>\n"\
@@ -45,10 +46,10 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
            )
            await state.set_state(SimpleTestCreate.create)
 
-@dp.message((F.text.startswith('@@') | (F.text=="❌ Bekor qilish")),SimpleTestCreate.create )
+@dp.message((F.text.startswith('@@') | (F.text=="🔙 Orqaga")),SimpleTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
-        if text =="❌ Bekor qilish":
+        if text =="🔙 Orqaga":
             await message.answer(
               text=f"⬆️ Kerakli bo'limni tanlang.",
               reply_markup=main_button()  )
@@ -202,12 +203,12 @@ async def start_handler(message: Message):
                 if degree__:
                     name = i.get('name',None)
                     telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} \n"
+                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
                     counter_+=1
                 else:
                     name = i.get('name',None)
                     telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))}\n"
+                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
                     counter_+=1
                     
             data_me = await checkformat_2(javoblar=test['answers'])
@@ -238,10 +239,22 @@ async def start_handler(message: Message):
                 await bot.send_message(
                     
                     text=html.bold(context),
-                    chat_id=i['telegram_id'],reply_markup=button_sertificate_simple(
-                        name=student_,author=author,degree=score
-                    )
+                    chat_id=i['telegram_id'],
+                     reply_markup=test_button_back()
                 ) 
+                try:
+                    from aiogram.types import BufferedInputFile
+                    image_bytes = write_simple_image(author=author,student=name,degree=degree__me)
+                    photo = BufferedInputFile(
+                        image_bytes.read(),
+                        filename="image1.png"
+                    )
+                    await bot.send_photo(
+                        chat_id=i['telegram_id'],
+                        photo=photo
+                    )
+                except:
+                         pass
             await delete_result_(code=int(code))
             await delete_answer_(id=code)
                 
@@ -289,9 +302,7 @@ async def start_handler(message: Message):
             await delete_answer_(id=code)
         else:
             raise e
-from aiogram.types import CallbackQuery
-from write_sertificate import *
-from aiogram.types import BufferedInputFile
+
 @dp.callback_query(SimpleCallback.filter())
 async def handle_view(callback: CallbackQuery, callback_data: SchoolCallback):
     print(callback_data)

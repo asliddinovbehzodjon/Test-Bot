@@ -145,7 +145,7 @@ def cancel_button():
     button = ReplyKeyboardBuilder()
    
     button.row(
-        KeyboardButton(text="❌ Bekor qilish"),
+        KeyboardButton(text="🔙 Orqaga"),
         
         
     )
