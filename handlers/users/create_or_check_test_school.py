@@ -147,7 +147,7 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                         await message.answer(html.bold(data['text_']),reply_markup=ReplyKeyboardRemove())
                         await create_results(
                             code = code,
-                            name = message.from_user.full_name,
+                            name = name_,
                             trues=data['trues'],
                             falses=data['falses'],
                             telegram_id=message.from_user.id,
@@ -219,18 +219,12 @@ async def start_handler(message: Message):
             for i in sorted_data:
                 get_result = await done_or_not(code=code,telegram_id=i['telegram_id'])
                 true_ = int(get_result.get('trues',1))
-                false_=int(get_result.get('falses',1))
-                degree__ = await info_degree_(all=true_+false_,trues=true_)
-                if degree__:
-                    name = i.get('name',None)
-                    telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
-                    counter_+=1
-                else:
-                    name = i.get('name',None)
-                    telegram_id = i.get('telegram_id',None)
-                    text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
-                    counter_+=1
+                false_=int(get_result.get('falses',1))   
+                name = i.get('name',None)
+                telegram_id = i.get('telegram_id',None)
+                text_me+=f"{counter_}.{html.bold(html.link(value=f'{name}',link=f'tg://user?id={telegram_id}'))} -- {true_} ta to'gri\n"
+                counter_+=1
+              
                     
             data_me = await checkformat_2(javoblar=test['answers'])
             te_= await show_answers(data_me)
@@ -241,6 +235,7 @@ async def start_handler(message: Message):
                     f"{text_me}\n\n\n"\
                     f"To`g`ri javoblar:\n\n"\
                     f"{html.pre(te_)}"  
+            await message.answer(html.bold(context))
             for i in data:
                 try:    
                         get_result = await done_or_not(code=code,telegram_id=i['telegram_id'])
@@ -259,7 +254,7 @@ async def start_handler(message: Message):
                
                 await bot.send_message(
                     
-                    text=html.bold(context),
+                    text=html.bold("Test yakunland!"),
                     chat_id=i['telegram_id'],
                     reply_markup=test_button_back()
                 ) 

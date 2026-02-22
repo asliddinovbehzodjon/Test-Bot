@@ -184,18 +184,18 @@ async def show_answers(data):
 async def info_degree_(all,trues):
     score = trues*100 / all
     toifa = ''
-    if score >60 and score<70:
+    if score >=60 and score<70:
       
         toifa = '2-toifa'
-    elif score >70 and score <80:
+    elif score >=70 and score <80:
       
         toifa = '1-toifa'
-    elif score >86:
+    elif score >=86:
        
         toifa = 'Oliy toifa'
     else:
         level = "Testdan o'tolmadingiz!"
-        toifa= ''
+        toifa= "Testdan o'tolmadingiz!"
     return toifa
 
 async def check_answers_2(trueanswers,answers):

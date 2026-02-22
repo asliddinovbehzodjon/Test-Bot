@@ -134,7 +134,7 @@ async def attestat_check_test(message:types.Message,state:FSMContext):
                         await message.answer(html.bold(data['text_']),reply_markup=ReplyKeyboardRemove())
                         await create_results(
                             code = code,
-                            name = message.from_user.full_name,
+                            name = name_,
                             trues=data['trues'],
                             falses=data['falses'],
                             telegram_id=message.from_user.id,
@@ -228,6 +228,7 @@ async def start_handler(message: Message):
                     f"{text_me}\n\n\n"\
                     f"To`g`ri javoblar:\n\n"\
                     f"{html.pre(te_)}"  
+            await message.answer(html.bold(context))
             for i in data:
                 try:    
                         get_result = await done_or_not(code=code,telegram_id=i['telegram_id'])
@@ -246,7 +247,7 @@ async def start_handler(message: Message):
                
                 await bot.send_message(
                     
-                    text=html.bold(context),
+                    text=html.bold("Test yakunlandi!"),
                     chat_id=i['telegram_id'],
                      reply_markup=test_button_back()
                 )
