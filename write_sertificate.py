@@ -11,13 +11,13 @@ def write_attestat_image(degree,author,student,channel):
     name = f"{student}"
     if  float(degree) >86:  
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} % natija ko‘rsatib, belgilangan talablar asosida 'Oliy malaka toifasi va 70 foizlik ustama'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
-    elif 80<float(degree)<=86:
+    elif 80<=float(degree)<=86:
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'oliy malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
-    elif 70<float(degree)<=80:
+    elif 70<=float(degree)<80:
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
-    elif 60<float(degree)<=70:
+    elif 60<=float(degree)<70:
         degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
-    elif 55<float(degree)<=60:
+    elif 55<=float(degree)<60:
         degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'Mutahasis malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     else:
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida ishtirok etib, test natijalariga asosan {degree} ball to'plaganligi munosabati bilan ushbu sertifikat bilan taqdirlandi."
