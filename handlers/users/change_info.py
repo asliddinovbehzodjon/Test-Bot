@@ -46,33 +46,39 @@ async def attestat(message:types.Message,state:FSMContext):
       await state.set_state(UserChangeNameData.name)
 @dp.message(F.text,UserChangeNameData.name)
 async def get_name(message:types.Message,state:FSMContext):
-   await state.update_data(
-      {
-         'name':message.text
-      }
-   )
-   await change_user_name(telegram_id=message.from_user.id,name=message.text)
-   user =  await get_user(telegram_id=message.from_user.id)
-   print(user)
-   if user['role'] =='📚 Repetitor':
-      role = True
-      await message.answer(
-              text=f"👤 Mening ma'lumotlarim.\n\n"
-                   f"✅ <b>Ism Familya: </b><b><i>{user['name']}</i></b>\n\n"
-                   f"✅ <b>Faoliyatiz: </b><b><i>{user['role']}</i></b>\n\n" 
-                   f"✅ <b>Kanalingiz: </b><b><i>{user['guruh']}</i></b>\n" 
-              ,
-              reply_markup=change_info_button(role=role)  )
+   if message.text =="⬅️ Orqaga":
+         await message.answer(
+        "🔝 Asosiy Menyu",reply_markup=main_button()
+      )
+         await state.clear()
    else:
-        user = await get_user(telegram_id=message.from_user.id)          
-        role =False
-        await message.answer(
-          text=f"👤 Mening ma'lumotlarim.\n\n"
-                f"✅ <b>Ism Familya: </b><b><i>{user['name']}</i></b>\n\n"
-                f"✅ <b>Faoliyatiz: </b><b><i>{user['role']}</i></b>\n" 
-          ,
-          reply_markup=change_info_button(role=role)  )
-   await state.clear()
+     await state.update_data(
+          {
+          'name':message.text
+          }
+     )
+     await change_user_name(telegram_id=message.from_user.id,name=message.text)
+     user =  await get_user(telegram_id=message.from_user.id)
+     print(user)
+     if user['role'] =='📚 Repetitor':
+          role = True
+          await message.answer(
+               text=f"👤 Mening ma'lumotlarim.\n\n"
+                    f"✅ <b>Ism Familya: </b><b><i>{user['name']}</i></b>\n\n"
+                    f"✅ <b>Faoliyatiz: </b><b><i>{user['role']}</i></b>\n\n" 
+                    f"✅ <b>Kanalingiz: </b><b><i>{user['guruh']}</i></b>\n" 
+               ,
+               reply_markup=change_info_button(role=role)  )
+     else:
+          user = await get_user(telegram_id=message.from_user.id)          
+          role =False
+          await message.answer(
+               text=f"👤 Mening ma'lumotlarim.\n\n"
+                    f"✅ <b>Ism Familya: </b><b><i>{user['name']}</i></b>\n\n"
+                    f"✅ <b>Faoliyatiz: </b><b><i>{user['role']}</i></b>\n" 
+               ,
+               reply_markup=change_info_button(role=role)  )
+     await state.clear()
 # Change Role 
 @dp.message(F.text.startswith("ℹ️ Faoliyat turini o'zgartirish"))
 async def attestat(message:types.Message,state:FSMContext):
@@ -83,7 +89,12 @@ async def attestat(message:types.Message,state:FSMContext):
     await state.set_state(UserChangeRoleData.role)
 @dp.message(F.text,UserChangeRoleData.role)
 async def get_name(message:types.Message,state:FSMContext):
-    if message.text in ["🧑‍🏫 O'qituvchi","🧑‍🎓 O'quvchi",'📚 Repetitor']:
+    if message.text =="⬅️ Orqaga":
+         await message.answer(
+        "🔝 Asosiy Menyu",reply_markup=main_button()
+      )
+         await state.clear()
+    elif message.text in ["🧑‍🏫 O'qituvchi","🧑‍🎓 O'quvchi",'📚 Repetitor']:
       await change_user_role(telegram_id=message.from_user.id,role=message.text)
       user =  await get_user(telegram_id=message.from_user.id)
       print(user)
@@ -123,6 +134,12 @@ async def attestat(message:types.Message,state:FSMContext):
    
 @dp.message(F.text,UserChangeGroupData.group)
 async def get_name(message:types.Message,state:FSMContext):
+     if message.text =="⬅️ Orqaga":
+         await message.answer(
+        "🔝 Asosiy Menyu",reply_markup=main_button()
+      )
+         await state.clear()
+     else:
       await change_user_group(telegram_id=message.from_user.id,guruh=message.text)
       user =  await get_user(telegram_id=message.from_user.id)
       print(user)
