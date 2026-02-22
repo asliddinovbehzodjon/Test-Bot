@@ -107,11 +107,15 @@ async def attestat_check_test(message:types.Message,state:FSMContext):
                 val = "☝️ To'g'ri test yakunlangandan so'ng yuboriladi."
                 code  = info.get('test_code',None)
                 get_test_me = await get_test(id=code)
+                print(get_test_me)
                 done = await done_or_not(code=code,telegram_id=message.from_user.id)
                 if done:
                     await message.answer(html.bold('Siz,bu testni allaqachon bajardingiz!'))
                 else:
-                    if get_test_me.get('answers',None):
+                    if get_test_me == {}:
+                        await message.answer(html.bold('Bu test allaqachon yakunlangan!'))
+                    
+                    elif get_test_me.get('answers',None):
                         info_2 = await checkformat_1(f"++{get_test_me['code']}++{get_test_me['answers']}")
                         data = await check_answers(
                             trueanswers=info_2['answers'],answers=info['answers']

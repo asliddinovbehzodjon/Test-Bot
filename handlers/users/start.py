@@ -93,4 +93,3 @@ async def get_group(message:types.Message,state:FSMContext):
          "🔝 Asosiy Menyu",reply_markup=main_button()
       )
       await state.clear()
-   

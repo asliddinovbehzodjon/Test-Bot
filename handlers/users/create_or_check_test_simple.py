@@ -27,7 +27,7 @@ def tekst2(creator,questions,code,bot_username,user_id):
     f"ℹ️ Savollar soni: {questions} ta\n\n"\
     f"ℹ️ Test kodi: {code}\n\n\n"\
     f"🔴 Javoblaringizni @{bot_username} ga quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-    f"{html.pre('%%test_kodi%%1a2b3c4d....')}\n\n\n"\
+    f"{html.pre('—test_kodi—1a2b3c4d....')}\n\n\n"\
     f"🛑 Eslatma!\t"\
     f"Javoblar aynan @{bot_username} ga yuborilishi shart, boshqasiga emas.\n"
     return tekst_2
@@ -42,11 +42,11 @@ async def attestat(message:types.Message,state:FSMContext):
 @dp.message((F.text =="➕ Oddiy test yaratish") )
 async def attestat_create_test(message:types.Message,state:FSMContext):
            await message.answer(
-               text=  f"<b>@@1a2b3c4d....30b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
+               text=  f"<b>//1a2b3c4d....50b ko'rinishida test yarating.</b>\n\n",reply_markup=cancel_button()
            )
            await state.set_state(SimpleTestCreate.create)
 
-@dp.message((F.text.startswith('@@') | (F.text=="🔙 Orqaga")),SimpleTestCreate.create )
+@dp.message((F.text.startswith('//') | (F.text=="🔙 Orqaga")),SimpleTestCreate.create )
 async def attestat_create_test(message:types.Message,state:FSMContext):
         text = message.text
         if text =="🔙 Orqaga":
@@ -94,14 +94,14 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
 @dp.message((F.text =="✅ Oddiy testni tekshirish") )
 async def attestat_check_test(message:types.Message,state:FSMContext):
            matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-           f"{html.pre('%%test_kodi%%1a2b3c4d....50b')}\n\n\n"\
+           f"{html.pre('::test_kodi::1a2b3c4d....50b')}\n\n\n"\
 
            await message.answer(matn)
 from aiogram.types import ReplyKeyboardRemove
-@dp.message((F.text.startswith('%%')))
+@dp.message((F.text.startswith('::')))
 async def attestat_check_school(message:types.Message,state:FSMContext): 
             info = await checkformat_2305(message.text)
-
+            print(info)
             if info:
                 val = "☝️ To'g'ri test yakunlangandan so'ng yuboriladi."
                 code  = info.get('test_code',None)
@@ -110,7 +110,10 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                 if done:
                     await message.answer(html.bold('Siz,bu testni allaqachon bajardingiz!'))
                 else:
-                    if get_test_me.get('answers',None):
+                    if get_test_me == {}:
+                        await message.answer(html.bold('Bu test allaqachon yakunlangan!'))
+                    
+                    elif get_test_me.get('answers',None):
                         info_2 = await checkformat_3(f"!!{get_test_me['code']}!!{get_test_me['answers']}")
                         data = await check_answers_2(
                             trueanswers=info_2['answers'],answers=info['answers']
@@ -149,7 +152,7 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
             else:
                 
                 matn = f"🔴 Javoblaringizni  quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-           f"{html.pre('%%test_kodi%%1a2b3c4d....30b')}\n\n\n"\
+           f"{html.pre('::test_kodi::1a2b3c4d....50b')}\n\n\n"\
            
                 await message.answer(matn)
 

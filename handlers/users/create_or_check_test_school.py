@@ -124,9 +124,12 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                 if done:
                     await message.answer(html.bold('Siz,bu testni allaqachon bajardingiz!'))
                 else:
-                    if get_test_me.get('answers',None):
+                    if get_test_me == {}:
+                        await message.answer(html.bold('Bu test allaqachon yakunlangan!'))
+                    
+                    elif get_test_me.get('answers',None):
                         info_2 = await checkformat_3(f"!!{get_test_me['code']}!!{get_test_me['answers']}")
-                        data = await check_answers_2(
+                        data = await check_answers_3(
                             trueanswers=info_2['answers'],answers=info['answers']
                         )
                         await message.answer(f"{html.bold('👤 Foydalanuvchi: ')}\n\n"\

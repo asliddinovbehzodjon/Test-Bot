@@ -15,5 +15,15 @@ async def test(message:types.Message):
     await message.answer(
          "🔝 Asosiy Menyu",reply_markup=main_button()
       )
+@dp.message(F.text=="⬅️ Orqaga" )
+async def test(message:types.Message):
+    await message.answer(
+         "🔝 Asosiy Menyu",reply_markup=main_button()
+      )
+@dp.message(F.text=="🔙 Orqaga")
+async def test(message:types.Message):
+    await message.answer(
+         "🔝 Asosiy Menyu",reply_markup=main_button()
+      )
 
 

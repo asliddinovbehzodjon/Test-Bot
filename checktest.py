@@ -34,9 +34,9 @@ async def checkformat(answers:str):
     else:
         return False
 async def checkformatschool(answers:str):
-    if answers.startswith('@@'):  
+    if answers.startswith('//'):  
             try:
-                cut = answers.rfind('@@') + 2
+                cut = answers.rfind('//') + 2
                 print(cut)
                 javoblar = answers[cut:]
                 print(javoblar)
@@ -45,7 +45,7 @@ async def checkformatschool(answers:str):
                 print(keys,values)
                 if len(keys) == len(values):
                     data = {}
-                    data['test_code'] =answers[2:answers.rfind('@@')]
+                    data['test_code'] =answers[2:answers.rfind('//')]
                     data['answers'] = await gototrueformat(answers=javoblar)
                     data['answers_string'] =javoblar
                     data['len'] = len(await gototrueformat(answers=javoblar))
@@ -229,6 +229,47 @@ async def check_answers_2(trueanswers,answers):
           f"❌ Xato javoblar: <b>{fl}</b> ta\n"
           f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"
            f"🗓️ {now_date} ⏱️ {now_hour}\n\n"
+           f"✅ Oddiy test")
+    data = {}
+    data['result'] = text
+    data['trues'] = tr
+    data['falses']  = fl
+    data['score'] = score
+    data['level']=level
+    data['text_']=text_
+    data['toifa']=toifa
+    return data
+async def check_answers_3(trueanswers,answers):
+    text = ''
+    tr=0
+    fl = 0
+    med  = []
+    for i in trueanswers:
+        if trueanswers.get(i) == answers.get(i):
+            tr+=1
+            med.append(f'{i}.{trueanswers.get(i)} ✅')
+        else:
+            fl+=1  
+            med.append(f'{i}.{trueanswers.get(i)} ❌')        
+    all = tr+fl
+    score = tr*100 / all
+    level = ''
+    print(med)
+    lines = []
+    text_=''
+    for i in range(0, len(med),3):
+        row = med[i:i+3]
+        text_+="\t\t\t".join("{}".format(x) for x in row)+'\n'
+    
+    score = "{:.2f}".format(score)
+    toifa = f"🎯 Siz testdan {score} % lik natijani qo'lgan kiritdiz"
+    now = datetime.now()
+    now_date = now.strftime("%m.%d.%Y")
+    now_hour = now.strftime("%H:%M:%S")
+    text+=(f"✅ To'g'ri javoblar: <b>{tr}</b> ta\n"
+          f"❌ Xato javoblar: <b>{fl}</b> ta\n"
+          f"🎯 Sifat ko'rsatkichi: <b>{score}</b> %\n\n"
+           f"🗓️ {now_date} ⏱️ {now_hour}\n\n"
            f"✅ Maktab testi")
     data = {}
     data['result'] = text
@@ -239,6 +280,7 @@ async def check_answers_2(trueanswers,answers):
     data['text_']=text_
     data['toifa']=toifa
     return data
+
 
 
 import re
@@ -294,30 +336,33 @@ async def checkformat_school(answers:str):
         return False
 async def checkformat_2305(answers:str):
    
-    if answers.startswith('%%'):
+    if answers.startswith(':'):
        
-        if answers.count('%')==4:
-           
+        if answers.count(':')==4:
+            
             try:
-                cut = answers.rfind('%%') + 2
+                cut = answers.rfind('::') + 2
                 javoblar = answers[cut:]
                 keys = re.findall(r'\d+', javoblar)
                 values = re.findall(r'[a-zA-Z]', javoblar)
                 if len(keys) == len(values):
                    
                     data = {}
-                    data['test_code'] =answers[2:answers.rfind('%%')]
+                    data['test_code'] =answers[2:answers.rfind('::')]
                     data['answers'] = await gototrueformat(answers=javoblar)
                     data['answers_string'] =javoblar
                     data['len'] = len(await gototrueformat(answers=javoblar))
                     return data
                 else:
+                    print(3)
                     return False
             except:
                 return False
         else:
+            print(2)
             return False
     else:
+        print(1)
         return False
 if __name__ =='__main__':
-    print(asyncio.run(checkformatschool('@@a12b3d')))
+    print(asyncio.run(checkformat_2305('::9::1a2b3c')))

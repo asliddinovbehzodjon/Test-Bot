@@ -41,7 +41,7 @@ async def attestat(message:types.Message,state:FSMContext):
       user_id = message.from_user.id
       
       await message.answer(
-          text= f"<b>FISH kiriting.</b>\nMasalan: <b> Asliddinov Behzod Furqat o'g'li </b>"
+          text= f"<b>FISH kiriting.</b>\nMasalan: <b> Axmedov Fazliddin </b>"
       )
       await state.set_state(UserChangeNameData.name)
 @dp.message(F.text,UserChangeNameData.name)
