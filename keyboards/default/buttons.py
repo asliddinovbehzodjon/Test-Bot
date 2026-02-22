@@ -9,6 +9,12 @@ def admin_button():
 
     )
     button.row(
+
+        KeyboardButton(text='🗣 Reklama yuborish'),
+                  
+
+    )
+    button.row(
                KeyboardButton(text="🗣 Kanallar"),
                KeyboardButton(text="❌ Kanal o'chirish"))
 

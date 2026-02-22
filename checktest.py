@@ -130,10 +130,10 @@ async def check_answers(trueanswers,answers):
         row = med[i:i+3]
         text_+="\t\t\t".join("{}".format(x) for x in row)+'\n'
     toifa = ''
-    if score >60 and score<70:
+    if score >=60 and score<70:
         level ="Tabriklaymiz, siz 2-toifaga o‘tdingiz!"
         toifa = '2-toifa'
-    elif score >70 and score <80:
+    elif score >=70 and score <80:
         level = "Tabriklaymiz, siz 1-toifaga o‘tdingiz!"
         toifa = '1-toifa'
     elif score >86:

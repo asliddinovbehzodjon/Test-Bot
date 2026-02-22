@@ -83,13 +83,15 @@ async def attestat_create_test(message:types.Message,state:FSMContext):
                     ),
                    reply_markup=test_button_back()
                 )
+                user_me = await get_user(telegram_id=message.from_user.id)
+                name_=user_me.get('name',message.from_user.full_name)
                 await message.answer(
                     html.bold(
                         tekst2(
                         code = created,
                         questions=info.get('len',None),
                         user_id=message.from_user.id,
-                        creator=message.from_user.full_name,
+                        creator=name_,
                         bot_username=bot_username,
                         class_number=class_number,
                         subject = subject
@@ -120,6 +122,8 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                 val = "☝️ To'g'ri test yakunlangandan so'ng yuboriladi."
                 code  = info.get('test_code',None)
                 get_test_me = await get_test_school(id=code)
+                user_me = await get_user(telegram_id=message.from_user.id)
+                name_=user_me.get('name',message.from_user.full_name)
                 done = await done_or_not(code=code,telegram_id=message.from_user.id)
                 if done:
                     await message.answer(html.bold('Siz,bu testni allaqachon bajardingiz!'))
@@ -133,7 +137,7 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                             trueanswers=info_2['answers'],answers=info['answers']
                         )
                         await message.answer(f"{html.bold('👤 Foydalanuvchi: ')}\n\n"\
-                            f"{html.bold(html.link(value=f'{message.from_user.full_name}',link=f'tg://user?id={message.from_user.id}'))}\n\n"\
+                            f"{html.bold(html.link(value=name_,link=f'tg://user?id={message.from_user.id}'))}\n\n"\
                             f"{html.bold(f'📖 Test kodi: {code}')}\n" \
                             f"{data['result']}\n\n\n\n\n\n"\
                             f"<b>🎉🎉🎉 Testda ishtirok etganingiz uchun tashakkur!</b>\n{html.bold(value=data['toifa'])}\n\n\n\n\n" \
@@ -149,7 +153,7 @@ async def attestat_check_school(message:types.Message,state:FSMContext):
                             telegram_id=message.from_user.id,
                         )
                         try:
-                            cont =  f"{html.bold(html.link(value=f'{message.from_user.full_name}',link=f'tg://user?id={message.from_user.id}'))} {html.bold(code)} kodli testning javoblarini yubordi.\n\n"\
+                            cont =  f"{html.bold(html.link(value=name_,link=f'tg://user?id={message.from_user.id}'))} {html.bold(code)} kodli testning javoblarini yubordi.\n\n"\
                                     f"Natijasi: {html.bold(data['trues'])} ta to'g'ri va {html.bold(data['falses'])} ta noto'g'ri\n\n"\
                                     f"/hozirgiholat_{code}\n"\
                                     f"/tugatish_{code}"

@@ -16,7 +16,7 @@ def write_attestat_image(degree,author,student,channel):
     elif 70<=float(degree)<80:
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 60<=float(degree)<70:
-        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '1 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
+        degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida '2 malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 55<=float(degree)<60:
         degree_ = f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'Mutahasis malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     else:
