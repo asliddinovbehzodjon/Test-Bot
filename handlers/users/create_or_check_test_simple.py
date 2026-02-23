@@ -27,7 +27,7 @@ def tekst2(creator,questions,code,bot_username,user_id):
     f"ℹ️ Savollar soni: {questions} ta\n\n"\
     f"ℹ️ Test kodi: {code}\n\n\n"\
     f"🔴 Javoblaringizni @{bot_username} ga quyidagi ko'rinishlarda yuborishingiz mumkin:\n\n"\
-    f"{html.pre('—test_kodi—1a2b3c4d....')}\n\n\n"\
+    f"{html.pre('::test_kodi::1a2b3c4d....')}\n\n\n"\
     f"🛑 Eslatma!\t"\
     f"Javoblar aynan @{bot_username} ga yuborilishi shart, boshqasiga emas.\n"
     return tekst_2
@@ -220,7 +220,7 @@ async def start_handler(message: Message):
                     f"{text_me}\n\n\n"\
                     f"To`g`ri javoblar:\n\n"\
                     f"{html.pre(te_)}"  
-            await message.answer(html.bold(context))
+            await message.answer(html.bold(context),reply_markup=test_button_back())
             for i in data:
                 try:    
                         get_result = await done_or_not(code=code,telegram_id=i['telegram_id'])
@@ -302,7 +302,7 @@ async def start_handler(message: Message):
             await delete_result_(code=int(code))
             await delete_answer_(id=code)
         else:
-            raise e
+            await message.answer(html.bold('Siz bu testni yakunlay olmaysiz!'))
 
 @dp.callback_query(SimpleCallback.filter())
 async def handle_view(callback: CallbackQuery, callback_data: SchoolCallback):

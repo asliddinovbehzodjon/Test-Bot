@@ -228,7 +228,7 @@ async def start_handler(message: Message):
                     f"{text_me}\n\n\n"\
                     f"To`g`ri javoblar:\n\n"\
                     f"{html.pre(te_)}"  
-            await message.answer(html.bold(context))
+            await message.answer(html.bold(context),reply_markup=test_button_back())
             for i in data:
                 try:    
                         get_result = await done_or_not(code=code,telegram_id=i['telegram_id'])
@@ -308,4 +308,4 @@ async def start_handler(message: Message):
             await delete_result_(code=int(code))
             await delete_answer_(id=code)
         else:
-            raise e
+            await message.answer(html.bold('Siz bu testni yakunlay olmaysiz!'))
