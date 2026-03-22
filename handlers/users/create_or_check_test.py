@@ -231,7 +231,9 @@ async def start_handler(message: Message):
             await message.answer(html.bold(context),reply_markup=test_button_back())
             for i in data:
                 try:    
-                        get_result = await done_or_not(code=code,telegram_id=i['telegram_id'])
+                       # print(f"-- {i['telegram_id']} -- {i['code']}")
+                        get_result = await done_or_not(code=i['code'],telegram_id=int(i['telegram_id']))
+                       # print(f"**{get_result}**")
                         true_ = int(get_result.get('trues',1))
                         false_=int(get_result.get('falses',1))
                         degree__me = true_*100 / (true_+false_)
@@ -251,7 +253,6 @@ async def start_handler(message: Message):
                     chat_id=i['telegram_id'],
                      reply_markup=test_button_back()
                 )
-          
                 try:
                     from aiogram.types import BufferedInputFile
                     image_bytes = write_attestat_image(author=author,student=student_,degree=score,channel=channel)
@@ -262,8 +263,8 @@ async def start_handler(message: Message):
                     await bot.send_photo(photo=photo, chat_id=i['telegram_id'])
                 except:
                     pass
-                await delete_result_(code=int(code))
-                await delete_answer_(id=code)
+            await delete_result_(code=int(code))
+            await delete_answer_(id=code)
                 
         else:
             await message.answer(html.bold('Siz bu testni yakunlay olmaysiz!'))

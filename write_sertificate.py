@@ -9,7 +9,7 @@ def write_attestat_image(degree,author,student,channel):
     draw = ImageDraw.Draw(image)
     # 3. Define the text and position
     name = f"{student}"
-    if  float(degree) >86:  
+    if  float(degree)>86:  
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} % natija ko‘rsatib, belgilangan talablar asosida 'Oliy malaka toifasi va 70 foizlik ustama'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
     elif 80<=float(degree)<=86:
         degree_=f"Telegramdagi «{channel}» kanali orqali @Aqilli_testbot asosida tashkil etilgan attestatsiya test sinovlarida {degree} natija ko‘rsatib, belgilangan talablar asosida 'oliy malaka toifasi'ni qo‘lga kiritganligi munosabati bilan ushbu sertifikat topshirildi."
