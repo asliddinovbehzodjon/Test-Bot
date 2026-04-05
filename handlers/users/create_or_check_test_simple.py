@@ -244,8 +244,9 @@ async def start_handler(message: Message):
                      reply_markup=test_button_back()
                 ) 
                 try:
+                    user_me = await get_user(telegram_id=i['telegram_id'])
                     from aiogram.types import BufferedInputFile
-                    image_bytes = write_simple_image(author=author,student=student_,degree=score)
+                    image_bytes = write_simple_image(author=author,student=student_,degree=score,sertificate_code=user_me.get('language',1))
                     photo = BufferedInputFile(
                         image_bytes.read(),
                         filename="image1.png"

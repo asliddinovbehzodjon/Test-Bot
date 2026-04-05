@@ -6,6 +6,8 @@ from api import *
 from states.mystate import UserGetData
 from aiogram.fsm.context import FSMContext
 from keyboards.default.buttons import *
+from keyboards.inline.buttons import *
+from aiogram.utils.media_group import MediaGroupBuilder
 # Start Command
 def text(fullname):
     return (f"<b>👋 Assalomu alaykum {fullname}!</b>\n\n"
@@ -93,3 +95,38 @@ async def get_group(message:types.Message,state:FSMContext):
          "🔝 Asosiy Menyu",reply_markup=main_button()
       )
       await state.clear()
+from aiogram.types import InputMediaPhoto, FSInputFile
+@dp.message(F.text=="Sertifikat tanlash")
+
+async def get_name(message:types.Message,state:FSMContext):
+   media = [
+        InputMediaPhoto(
+            media=FSInputFile("certificates/1.png"),
+            
+        ),
+        InputMediaPhoto(
+            media=FSInputFile("certificates/2.png"),
+        ),
+        InputMediaPhoto(
+             media=FSInputFile("certificates/3.png"),
+        ),
+         InputMediaPhoto(
+             media=FSInputFile("certificates/4.png"),
+        ),
+          InputMediaPhoto(
+             media=FSInputFile("certificates/5.png"),
+        ),
+    ]
+    
+    # Send the media group
+   await message.answer_media_group(media=media)
+   await message.answer("Tanlang 📸",reply_markup=button_sertificate_image_choose())
+@dp.callback_query(SertificateImageChooseCallback.filter())
+async def get_url(call:types.CallbackQuery,callback_data:SertificateImageChooseCallback):
+    num = callback_data.num
+    await change_user_language(telegram_id=call.from_user.id,language=num)
+    await call.answer(cache_time=60)
+    await call.message.answer(
+        text ="Sertifikat tanlandi!"
+    )
+    await call.message.delete()

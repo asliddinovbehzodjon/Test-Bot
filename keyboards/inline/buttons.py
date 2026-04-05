@@ -136,8 +136,45 @@ class SimpleCallback(CallbackData, prefix="simple"):
     name: str
     author:str
     degree:str
+class SertificateImageChooseCallback(CallbackData, prefix="sertifi"):
+   num:int
     
-   
+def button_sertificate_image_choose():
+    from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="1️⃣",
+                    callback_data=SertificateImageChooseCallback(num=1).pack()
+                ),
+                InlineKeyboardButton(
+                    text="2️⃣",
+                    callback_data=SertificateImageChooseCallback(num=2).pack()
+                ),
+               
+            ],
+            [
+                InlineKeyboardButton(
+                    text="3️⃣",
+                    callback_data=SertificateImageChooseCallback(num=3).pack()
+                ),
+                InlineKeyboardButton(
+                    text="4️⃣",
+                    callback_data=SertificateImageChooseCallback(num=4).pack()
+                ),
+               
+            ],
+             [
+                InlineKeyboardButton(
+                    text="5️⃣",
+                    callback_data=SertificateImageChooseCallback(num=5).pack()
+                ),
+                
+            ]
+        ]
+    )
+    return keyboard 
 def button_sertificate_simple(name,author,degree):
     from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
     keyboard = InlineKeyboardMarkup(

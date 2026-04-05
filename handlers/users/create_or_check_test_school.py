@@ -259,7 +259,9 @@ async def start_handler(message: Message):
                     reply_markup=test_button_back()
                 ) 
                 try:
-                    image_bytes = write_school_image(author=author,student=student_,degree=score,class_number=test.get('class_number',None),subject=test.get('subject',None))
+                    user_me = await get_user(telegram_id=i['telegram_id'])
+                    image_bytes = write_school_image(author=author,student=student_,degree=score,class_number=test.get('class_number',None),subject=test.get('subject',None),
+                                                     sertificate_code=user_me.get('language',1))
                     photo = BufferedInputFile(
                     image_bytes.read(),
                     filename="image1.png"                    ) 

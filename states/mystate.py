@@ -33,4 +33,7 @@ class SchoolTestCreate(StatesGroup):
     create = State()
 class SimpleTestCreate(StatesGroup):
     create = State()
-    
+from aiogram.filters.state import *
+
+class NewPost(StatesGroup):
+    NewMessage = State()

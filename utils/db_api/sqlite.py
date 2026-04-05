@@ -47,7 +47,7 @@ class Database:
         ])
         return sql, tuple(parameters.values())
 
-    def add_user(self, id: int = None, name: str = None, telegram_id: str = None, language: str = 'uz',role:str=None,guruh:str=None):
+    def add_user(self, id: int = None, name: str = None, telegram_id: str = None, language: str = '1',role:str=None,guruh:str=None):
         try:
             sql = """
         INSERT INTO Users(id, name,telegram_id, language,role,guruh) VALUES(?, ?, ?, ?,?,?)
